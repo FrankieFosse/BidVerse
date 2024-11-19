@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - BidVerse</title>
+    <link rel="stylesheet" href="output.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://kit.fontawesome.com/d753c6feaf.js" crossorigin="anonymous"></script>
+    <script type="module" src="/js/login.js"></script>
+    <script type="module" src="/js/logout.js"></script>
+</head>
+<body>
+    
+    <header>
+
+        <img src="/images/BidVerse logo.png" class="hidden">
+        <i class="fa-solid fa-house"></i>
+        <i class="fa-solid fa-user"></i>
+        <i class="fa-solid fa-bars"></i>
+        <button id="logout">Log out</button>
+
+    </header>
+
+
+
+    <main>
+
+        <form id="login" class="flex flex-col w-4/5 items-center bg-gray-500">
+            <label for="email">Email: </label><input name="email" id="email">
+            <label for="password">Password: </label><input type="password" name="password" id="password">
+            <button type="submit">Log in</button>
+            <p id="output" class="opacity-0">Please enter email and password</p>
+            <a href="register.html">Register</a>
+        </form>
+
+    </main>
+
+</body>
+</html>
