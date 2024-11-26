@@ -2,6 +2,9 @@ import {listData} from "./utils.js";
 
 let outElement = document.getElementById("output");
 let out = document.getElementById("profileListings");
+const closeOverlayButton1 = document.getElementById("closeOverlayButton1");
+const closeOverlayButton2 = document.getElementById("closeOverlayButton2");
+const avatarOverlay = document.getElementById("avatarOverlay");
 
 let collection = [];
 
@@ -37,7 +40,11 @@ function listProfile(profile, out) {
     <div class="text-gray-100 bg-gray-900 mx-5 my-5 py-10 flex flex-col h-2/4 w-11/12 text-center items-center">
     <h1 class="w-3/5 text-3xl">${profile.data.name}</h1>
     <p class="opacity-50 mb-5">${profile.data.email}</p>
-    <img src=${profile.data.avatar.url} class="rounded-full h-64">
+    <div class="flex flex-row justify-center items-center">
+    <img src=${profile.data.avatar.url} class="rounded-full h-64 w-64">
+    <i id="editAvatarButton" class="fa-solid fa-pen-to-square relative left-5 text-lg hover:scale-110 duration-300 cursor-pointer"></i>
+    </div>
+
 
 
     </div>
@@ -50,6 +57,23 @@ function listProfile(profile, out) {
     </section>
     `;
     out.innerHTML = newDiv;
+
+    const editAvatarButton = document.getElementById("editAvatarButton");
+
+    editAvatarButton.addEventListener("click", openAvatarOverlay);
+
+
+}
+
+closeOverlayButton1.addEventListener("click", closeAvatarOverlay);
+closeOverlayButton2.addEventListener("click", closeAvatarOverlay);
+
+function openAvatarOverlay() {
+    avatarOverlay.style.display = "block";
+}
+
+function closeAvatarOverlay() {
+    avatarOverlay.style.display = "none";
 }
 
 
@@ -78,3 +102,7 @@ async function getPostsByProfile() {
 }
 
 getPostsByProfile();
+
+
+
+

@@ -10,16 +10,26 @@
     <script type="module" src="/js/script.js"></script>
     <script type="module" src="/js/profile.js"></script>
     <script type="module" src="/js/avatar.js"></script>
+    <script type="module" src="/js/logout.js"></script>
 </head>
-<body class="bg-red-500">
+<body class="bg-gray50">
     
-    <header class="bg-primary30">
+    <header class="bg-brown70 bg-opacity-75 backdrop-blur-sm fixed w-full z-10 top-0">
+        
+        <nav class="h-12 content-center text-gray30">
+        <ul class="flex flex-row w-full items-center justify-evenly">
+            <li class="w-24 hover:scale-110 duration-300 flex flex-col items-center"><a href="/html/index.html"><img class="w-8 h-auto" src="/images/BidVerse logo.png"></a></li>
+            <li id="login" class="hover:scale-110 hover:bg-brown70 hover:bg-opacity-50 px-3 duration-300 cursor-pointer rounded-full"><a href="login.html">Log in</a></li>
+            <li id="profileLink" class="w-24 hover:scale-110 duration-300 hidden justify-items-center"><div class="w-8 h-8 border-gray30 border-solid border-2 rounded-full cursor-pointer" id="avatar"></div></li>
+            <li id="logout" class="hover:scale-110 hover:bg-brown70 hover:bg-opacity-50 px-3 duration-300 cursor-pointer rounded-full hidden text-center w-24">Log out</li>
+            <li class="hidden"><i class="fa-solid fa-bars"></i></li>
+        </ul>
 
-        <img src="/images/BidVerse logo.png" class="hidden">
-        <a href="login.html">Login</a>
-        <i class="fa-solid fa-house"></i>
-        <li id="profileLink"><div id="avatar"></div></li>
-        <i class="fa-solid fa-bars"></i>
+        <ul id="hamburgerMenu" class="hidden">
+            <li><i class="fa-solid fa-house"></i></li>
+            <li class="w-10 h-10" id="profileLink"><div id="avatar"></div></li>
+        </ul>
+        </nav>
 
     </header>
 
@@ -27,11 +37,15 @@
 
     <main>
 
-        <input id="search" type="text" placeholder="Search">
+    <section class="bg-brown30 h-12 flex flex-col justify-center content-center items-center mt-12">
+        <input id="search" type="text" placeholder="Search" class="w-2/4 px-2 outline-none rounded-full text-center">
+    </section>
 
         <div id="carousel"></div>
 
-        <div id="homeOutput"></div>
+    <section class="flex flex-col bg-gray70">
+        <div class="grid grid-cols-4 gap-6 justify-items-center m-6" id="homeOutput"></div>
+    </section>
 
     </main>
 

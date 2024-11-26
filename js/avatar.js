@@ -27,7 +27,7 @@ getProfileByName();
 
 function listProfile(profile, out) {
     let newDiv = `
-    <img src=${profile.data.avatar.url} class="rounded-full h-10">
+    <img src=${profile.data.avatar.url} class="rounded-full">
     `;
     out.innerHTML = newDiv;
 }
