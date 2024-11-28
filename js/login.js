@@ -41,16 +41,3 @@ async function getToken(email, password) {
     }
 }
 
-const isLoggedIn = () => {
-    let token = localStorage.getItem("token");
-    let email = localStorage.getItem("email");
-
-    if (token && email) {
-        console.log("Logged in");
-    } else {
-        console.log("Not logged in");
-    }
-}
-
-window.addEventListener("load", isLoggedIn);
-

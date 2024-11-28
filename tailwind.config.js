@@ -1,12 +1,15 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: ["./html/**/*.{html,js}"],
+  content: ["./html/**/*.{html,js}", "./js/**/*.{html,js}"],
   theme: {
     extend: {
+      fontFamily: {
+        montserrat: ["Montserrat", 'sans-serif']
+      },
       colors: {
-        primary50: "#ec7249",
-        primary70: "#ffaf94",
-        primary30: "#ec7249",
+        primary70: "#994A2F",
+        primary50: "#EC7249",
+        primary30: "#FFAF94",
         brown70: "#3A2B26",
         brown50: "#513D36",
         brown30: "#906D61",
