@@ -1,10 +1,18 @@
 export const homeOutput = document.getElementById("homeOutput")
 
+
+
+
 export const listItemTemplate = (listing) => {
-    return `<a href="details.html?id=${listing.id}" class="hover:scale-105 duration-150 text-center w-full">
+        let imagesOutput = listing.media.map(listing => {
+            return `
+            <img src=${listing.url ? listing.url : "/images/image-placeholder-500x500.jpg"}>
+            `
+        }).slice(0, 1);
+    return `<a href="details.html?id=${listing.id}" class="w-full bg-blue50 h-48 overflow-hidden">
             <div id="postElement" class="flex flex-col justify-center items-center">
-            <h2 class="bg-blue50 h-16 w-full content-center text-gray30 rounded-t overflow-hidden">${listing.title}</h2>
-            <img class="w-full" src=${listing.media?.url ? listing.media?.url : "../../images/image-placeholder-500x500.jpg"}>
+            <h2 class="bg-blue50 h-16 w-full content-center text-gray30 overflow-hidden text-center">${listing.title}</h2>
+            <div class="h-24 w-5/6 mb-2 bg-gray70 object-contain overflow-hidden content-center">${imagesOutput}</div>
             </div>
             </a>`;
 }

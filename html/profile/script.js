@@ -25,6 +25,7 @@ async function getProfileByName() {
             }
         });
         const responseData = await response.json();
+        console.log(responseData);
         document.title = responseData.data.name + " - Social Media App";
         listProfile(responseData, outElement);
     } catch(error) {
@@ -36,13 +37,13 @@ getProfileByName();
 
 function listProfile(profile, out) {
     let newDiv = `
-    <section class="flex flex-col pb-5 bg-gray-700 bg-opacity-50 w-full md:w-3/5 items-center">
-    <div class="text-gray-100 bg-gray-900 mx-5 my-5 py-10 flex flex-col h-2/4 w-11/12 text-center items-center">
-    <h1 class="w-3/5 text-3xl">${profile.data.name}</h1>
-    <p class="opacity-50 mb-5">${profile.data.email}</p>
+    <section class="flex flex-col pb-5 bg-gray50 bg-opacity-50 w-full md:w-3/5 items-center">
+    <div class="bg-gray70 bg-opacity-75 mx-5 my-5 py-10 flex flex-col h-2/4 w-11/12 text-center items-center">
+    <h1 class="w-3/5 text-3xl text-gray30">${profile.data.name}</h1>
+    <p class="opacity-50 mb-5 text-gray30">${profile.data.email}</p>
     <div class="flex flex-row justify-center items-center">
-    <img src=${profile.data.avatar.url} class="rounded-full h-64 w-64">
-    <i id="editAvatarButton" class="fa-solid fa-pen-to-square relative left-5 text-lg hover:scale-110 duration-300 cursor-pointer"></i>
+    <img src=${profile.data.avatar.url} class="rounded-full h-48 w-48">
+    <i id="editAvatarButton" class="fa-solid fa-pen-to-square text-gray30 opacity-75 relative left-5 text-lg hover:scale-110 hover:opacity-100 duration-300 cursor-pointer bg-gray70 p-2 rounded"></i>
     </div>
 
 
@@ -50,9 +51,7 @@ function listProfile(profile, out) {
     </div>
 
     <div class="flex flex-col text-center text-gray-100 justify-around items-center w-4/5">
-        <p class="w-32 bg-blue-600 rounded-full saturate-50">Posts: ${profile.data._count.posts}</p>
-        <button id="followersButton" class="my-5 w-32 bg-blue-600 hover:bg-blue-500 duration-300 rounded-full saturate-50">Followers: ${profile.data._count.followers}</button>
-        <p class="w-32 bg-blue-600 rounded-full saturate-50">Following: ${profile.data._count.following}</p>
+        <p class="w-32 bg-primary50 rounded-full">Credits: ${profile.data.credits}</p>
     </div>
     </section>
     `;

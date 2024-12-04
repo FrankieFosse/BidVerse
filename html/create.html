@@ -44,16 +44,24 @@
     <main>
 
     <section class="bg-brown50 mt-12 py-2 flex flex-col items-center">
-        <form id="create" class="bg-brown30 flex flex-col h-full px-4 items-center">
+        <form id="create" class="bg-brown30 flex flex-col h-full w-3/4 px-4 items-center">
             <label for="title" class="mt-6 text-gray30">Title</label>
             <input type="text" id="title" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
-            <label for="mediaURL" class="mt-6 text-gray30">Media-URL</label>
-            <textarea id="mediaURL" class="px-2 py-1 rounded h-12 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300"></textarea>
-            <label for="mediaALT" class="mt-6 text-gray30">Media Alt-text / description</label>
-            <input type="text" id="mediaALT" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
+            <div id="addMediaButton" class="flex flex-row mt-6 text-gray30 text-lg items-center bg-brown50 bg-opacity-25 px-4 py-1 hover:scale-105 hover:bg-opacity-75 duration-300 cursor-pointer">
+            <i class="fa-solid fa-folder-plus mr-2"></i>
+            <p>Media</p>
+            </div>
+            <div>
+            <input id="filledMediaURL1" disabled type="text" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-50 focus:bg-opacity-100 duration-300 my-2 hidden">
+            <input id="filledMediaALT1" disabled type="text" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-50 focus:bg-opacity-100 duration-300 mt-2 mb-4 hidden">
+            <input id="filledMediaURL2" disabled type="text" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-50 focus:bg-opacity-100 duration-300 mb-2 mt-6 hidden">
+            <input id="filledMediaALT2" disabled type="text" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-50 focus:bg-opacity-100 duration-300 mt-2 mb-6 hidden">
+            <input id="filledMediaURL3" disabled type="text" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-50 focus:bg-opacity-100 duration-300 mb-2 mt-6 hidden">
+            <input id="filledMediaALT3" disabled type="text" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-50 focus:bg-opacity-100 duration-300 hidden">
+            </div>
             <label for="description" class="mt-6 text-gray30">Description</label>
             <textarea id="description" class="px-2 py-1 rounded h-36 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300"></textarea>
-            <label for="tags" class="mt-6 text-gray30">Tags</label>
+            <label for="tags" class="mt-6 text-gray30">Tags (separate with Space)</label>
             <textarea id="tags" class="px-2 py-1 rounded h-24 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300"></textarea>
             <label for="day" class="mt-6 text-gray30">Ends at date</label>
             <div class="flex flex-row content-center justify-between">
@@ -64,6 +72,46 @@
             <div id="createStatus" class="text-gray30 text-center pt-5 opacity-0 mb-5">Status</div>
         </form>
         <button id="createListingButton" class="bg-primary50 text-gray30 px-3 py-1 mt-2 outline-none hover:scale-110 hover:bg-primary30 duration-300">Create Listing</button>
+    </section>
+    <section id="mediaOverlay" class="bg-green-500 mt-12 flex flex-col items-center absolute w-full h-full top-0 hidden">
+        <form class="bg-brown30 flex flex-col w-full items-center h-full">
+            <div class="flex flex-col ml-auto mr-6">
+                <i id="cancelMedia2" class="fa-solid fa-xmark text-gray30 mt-5 hover:scale-125 hover:bg-opacity-100 duration-300 cursor-pointer px-1.5 py-1 rounded-full bg-brown50 bg-opacity-50"></i>
+            </div>
+            <h2 class="w-3/4 text-gray30 text-sm">Please provide valid Media URL and Alt-text to attach media. (Max 3)</h2>
+            <ul class="bg-brown30 w-full">
+            <li class="bg-brown50 bg-opacity-50 p-3 mt-3 mx-6 text-center">
+                <label for="mediaURL" class="mt-6 text-gray30">Media-URL</label>
+                <textarea id="mediaURL" class="px-2 mb-6 py-1 rounded h-12 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300"></textarea>
+                <label for="mediaALT" class="mt-6 text-gray30">Media Alt-text / description</label>
+                <input type="text" id="mediaALT" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
+                </li>
+                <div id="anotherMediaButton" class="flex flex-col w-full items-center">
+                <i class="fa-solid fa-square-plus text-gray30 opacity-75 hover:opacity-100 text-2xl bg-brown50 bg-opacity-50 px-2 hover:px-3 hover:scale-105 cursor-pointer duration-300"></i>
+                </div>
+                <li id="mediaElement2" class="bg-brown50 bg-opacity-50 p-3 mt-3 mx-6 text-center hidden">
+                    <div id="closeMediaElement2" class="flex flex-col items-end"><i class="fa-solid fa-xmark px-2 py-1 text-xs rounded-full hover:scale-110 duration-300 bg-brown70 bg-opacity-50 text-gray30"></i></div>
+                    <label for="mediaURL2" class="mt-6 text-gray30">Media-URL</label>
+                    <textarea id="mediaURL2" class="px-2 mb-6 py-1 rounded h-12 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300"></textarea>
+                    <label for="mediaALT2" class="mt-6 text-gray30">Media Alt-text / description</label>
+                    <input type="text" id="mediaALT2" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
+                    </li>
+                    <div id="anotherMediaButton2" class="flex flex-col w-full items-center hidden">
+                        <i class="fa-solid fa-square-plus text-gray30 opacity-75 hover:opacity-100 text-2xl bg-brown50 bg-opacity-50 px-2 hover:px-3 hover:scale-105 cursor-pointer duration-300"></i>
+                        </div>
+                    <li id="mediaElement3" class="bg-brown50 bg-opacity-50 p-3 mt-3 mx-6 text-center hidden">
+                        <div id="closeMediaElement3" class="flex flex-col items-end"><i class="fa-solid fa-xmark px-2 py-1 text-xs rounded-full hover:scale-110 duration-300 bg-brown70 bg-opacity-50 text-gray30"></i></div>
+                        <label for="mediaURL3" class="mt-6 text-gray30">Media-URL</label>
+                        <textarea id="mediaURL3" class="px-2 mb-6 py-1 rounded h-12 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300"></textarea>
+                        <label for="mediaALT3" class="mt-6 text-gray30">Media Alt-text / description</label>
+                        <input type="text" id="mediaALT3" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
+                        </li>
+            </ul>
+            <div class="grid grid-cols-3 grid-rows-2 justify-items-center bg-brown30 w-full h-max pb-6">
+            <button id="cancelMedia" class="row-start-2 col-start-1 bg-red50 text-gray30 px-3 py-1 mt-2 outline-none hover:scale-110 hover:bg-red30 duration-300">Cancel</button>
+            <div id="confirmMedia" class="row-start-2 col-start-3 bg-primary50 text-gray30 px-3 py-1 mt-2 outline-none hover:scale-110 hover:bg-primary30 duration-300">Confirm</div>
+            </div>
+        </form>
     </section>
 
     </main>
