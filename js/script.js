@@ -2,6 +2,7 @@ import {listItem, homeOutput} from "./utils.js";
 
 let api = `https://v2.api.noroff.dev/auction/listings`
 let collection = [];
+let out = document.getElementById("homeOutput")
 
 async function fetchListings() {
     try {
@@ -24,3 +25,20 @@ async function fetchListings() {
 }
 
 fetchListings();
+
+
+
+
+// Search function
+const search = document.getElementById("search");
+search.addEventListener("keyup", filterListings);
+
+function filterListings() {
+    const filterQuery = search.value;
+
+    const filtered = collection.filter((listing)=>{
+        return listing.title.toUpperCase().indexOf(filterQuery.toUpperCase()) > -1;
+    });
+
+    listItem (filtered, out);
+}

@@ -44,7 +44,7 @@ async function updateAvatar() {
         }
         else {
             avatarStatus.style.opacity = "100";
-            avatarStatus.innerHTML = "URL must be valid"
+            avatarStatus.innerHTML = responseData.errors[0].message;
         }
 
     } catch(error) {

@@ -43,7 +43,7 @@ async function getListingById() {
     try {
         const response = await fetch(url);
         const responseData = await response.json();
-        document.title = responseData.data.title + " - BetVerse";
+        document.title = responseData.data.title + " - BidVerse";
         listDetailedItem(responseData, detailsOutput);
     } catch(error) {
         console.error(error);
@@ -84,7 +84,7 @@ function listDetailedItem(listing, out) {
             <p class="bg-primary50 rounded-full w-12 h-12 text-center flex flex-col justify-center">${listing.data._count.bids}</p>
             </div>
     </div>
-    <p class="text-sm font-thin text-center">${listing.data.description}</p>
+    <p class="text-sm font-thin text-center">${listing.data.description? listing.data.description : ""}</p>
     <button id="bidOverlayButton" class="bg-primary50 w-max px-4 py-1 mt-4 hover:scale-110 hover:bg-primary30 duration-300">Add bid</button>
     <p class="text-center">Deadline: ${listing.data.endsAt.slice(0, 10)}</p>
     </div>

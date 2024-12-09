@@ -26,7 +26,7 @@ async function getProfileByName() {
         });
         const responseData = await response.json();
         console.log(responseData);
-        document.title = responseData.data.name + " - Social Media App";
+        document.title = responseData.data.name + " - BetVerse";
         listProfile(responseData, outElement);
     } catch(error) {
         console.error(error);
@@ -41,13 +41,10 @@ function listProfile(profile, out) {
     <div class="bg-gray70 bg-opacity-75 mx-5 my-5 py-10 flex flex-col h-2/4 w-11/12 text-center items-center">
     <h1 class="w-3/5 text-3xl text-gray30">${profile.data.name}</h1>
     <p class="opacity-50 mb-5 text-gray30">${profile.data.email}</p>
-    <div class="flex flex-row justify-center items-center">
+    <div class="flex flex-row justify-center items-center content-center w-full">
     <img src=${profile.data.avatar.url} class="rounded-full h-48 w-48">
-    <i id="editAvatarButton" class="fa-solid fa-pen-to-square text-gray30 opacity-75 relative left-5 text-lg hover:scale-110 hover:opacity-100 duration-300 cursor-pointer bg-gray70 p-2 rounded"></i>
+    <i id="editAvatarButton" class="fa-solid fa-pen-to-square text-gray30 opacity-75 absolute right-32 text-lg hover:scale-110 hover:opacity-100 duration-300 cursor-pointer bg-gray70 w-8 h-8 rounded items-center justify-center content-center self-center"></i>
     </div>
-
-
-
     </div>
 
     <div class="flex flex-col text-center text-gray-100 justify-around items-center w-4/5">
