@@ -1,3 +1,10 @@
+import {token, email} from "./utils.js";
+
+
+
+
+
+
 let avatar = document.getElementById("avatar");
 
 let params = new URL (document.location).searchParams;
@@ -5,6 +12,8 @@ let params = new URL (document.location).searchParams;
 let name = localStorage.getItem("name");
 const url = `https://v2.api.noroff.dev/auction/profiles/${name}`;
 
+
+if (token && email) {
 async function getProfileByName() {
     try {
         const response = await fetch(url, {
@@ -25,9 +34,11 @@ async function getProfileByName() {
 
 getProfileByName();
 
+}
+
 function listProfile(profile, out) {
     let newDiv = `
-    <img src=${profile.data.avatar.url} class="rounded-full">
+    <img src=${profile.data.avatar.url} class="rounded-full h-8 w-8 border-gray30 border-solid border-2">
     `;
     out.innerHTML = newDiv;
 }

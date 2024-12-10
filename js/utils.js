@@ -1,6 +1,37 @@
 export const homeOutput = document.getElementById("homeOutput")
 
 
+// Check if logged in
+export let token = localStorage.getItem("token");
+export let email = localStorage.getItem("email");
+
+const isLoggedIn = () => {
+    const creditsLink = document.getElementById("creditsLink");
+    const createListingLink = document.getElementById("createListingLink");
+    const login2 = document.getElementById("login2");
+    const profileLink2 = document.getElementById("profileLink2");
+
+    if (token && email) {
+        console.log("Logged in");
+        logout2.style.display = "flex";
+        login2.style.display = "none";
+    } else {
+        console.log("Not logged in");
+        logout2.style.display = "none";
+        login2.style.display = "flex";
+        creditsLink.style.display = "none";
+        createListingLink.style.display = "none";
+        profileLink2.style.display = "none";
+    }
+}
+
+window.addEventListener("load", isLoggedIn);
+
+
+
+
+
+
 
 
 export const listItemTemplate = (listing) => {
@@ -29,23 +60,7 @@ export function listItem(list, out) {
     }
 }
 
-const isLoggedIn = () => {
-    let token = localStorage.getItem("token");
-    let email = localStorage.getItem("email");
-    const login2 = document.getElementById("login2");
 
-    if (token && email) {
-        console.log("Logged in");
-        logout2.style.display = "flex";
-        login2.style.display = "none";
-    } else {
-        console.log("Not logged in");
-        logout2.style.display = "none";
-        login2.style.display = "flex";
-    }
-}
-
-window.addEventListener("load", isLoggedIn);
 
 
 
@@ -56,6 +71,8 @@ const name = localStorage.getItem("name");
 const url = `https://v2.api.noroff.dev/auction/profiles/${name}`
 const credits = document.getElementById("credits");
 
+
+if (token && email) {
 async function getCredits() {
     try {
         const response = await fetch(url, {
@@ -76,3 +93,5 @@ async function getCredits() {
 }
 
 getCredits();
+
+}

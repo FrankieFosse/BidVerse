@@ -10,6 +10,9 @@ loginForm.addEventListener("submit", (event) => {
         getToken(email, password);
     } else {
         out.style.opacity = "100";
+        setTimeout(() => {
+            out.style.opacity = "0";
+        }, 3000);
     }
 });
 
@@ -33,8 +36,11 @@ async function getToken(email, password) {
             localStorage.setItem("token", data.data.accessToken);
             window.location = "index.html";
         } else {
-            throw new Error(response.statusText),
             out.innerHTML = "Wrong username or password";
+            out.style.opacity = "100";
+            setTimeout(() => {
+                out.style.opacity = "0";
+            }, 3000);
         }
     } catch (error) {
         console.error(error.message);

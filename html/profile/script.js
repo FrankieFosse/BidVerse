@@ -5,6 +5,9 @@ let out = document.getElementById("profileListings");
 const closeOverlayButton1 = document.getElementById("closeOverlayButton1");
 const closeOverlayButton2 = document.getElementById("closeOverlayButton2");
 const avatarOverlay = document.getElementById("avatarOverlay");
+const avatarURL = document.getElementById("avatarURL");
+const avatarALT = document.getElementById("avatarALT");
+const avatarStatus = document.getElementById("avatarStatus");
 
 let collection = [];
 
@@ -41,9 +44,9 @@ function listProfile(profile, out) {
     <div class="bg-gray70 bg-opacity-75 mx-5 my-5 py-10 flex flex-col h-2/4 w-11/12 text-center items-center">
     <h1 class="w-3/5 text-3xl text-gray30">${profile.data.name}</h1>
     <p class="opacity-50 mb-5 text-gray30">${profile.data.email}</p>
-    <div class="flex flex-row justify-center items-center content-center w-full">
+    <div class="flex flex-col justify-center items-center content-center w-full">
     <img src=${profile.data.avatar.url} class="rounded-full h-48 w-48">
-    <i id="editAvatarButton" class="fa-solid fa-pen-to-square text-gray30 opacity-75 absolute right-32 text-lg hover:scale-110 hover:opacity-100 duration-300 cursor-pointer bg-gray70 w-8 h-8 rounded items-center justify-center content-center self-center"></i>
+    <i id="editAvatarButton" class="fa-solid fa-pen-to-square text-gray30 mt-4 opacity-75 text-lg hover:scale-110 hover:opacity-100 duration-300 cursor-pointer bg-gray70 w-8 h-8 rounded items-center justify-center content-center self-center hidden"></i>
     </div>
     </div>
 
@@ -58,7 +61,12 @@ function listProfile(profile, out) {
 
     editAvatarButton.addEventListener("click", openAvatarOverlay);
 
-
+    const loggedInProfile = `${localStorage.getItem("name")}`;
+        if (loggedInProfile === `${profile.data.name}`) {
+        editAvatarButton.style.display = "flex";
+    } else {
+        editAvatarButton.style.display = "none";
+    }
 }
 
 closeOverlayButton1.addEventListener("click", closeAvatarOverlay);
@@ -70,6 +78,9 @@ function openAvatarOverlay() {
 
 function closeAvatarOverlay() {
     avatarOverlay.style.display = "none";
+    avatarURL.value = "";
+    avatarALT.value = "";
+    avatarStatus.style.opacity = "0";
 }
 
 

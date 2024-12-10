@@ -1,3 +1,5 @@
+import {token, email} from "./utils.js";
+
 let params = new URL (document.location).searchParams;
 
 const detailsOutput = document.getElementById("detailsOutput");
@@ -10,10 +12,13 @@ const bidStatus = document.getElementById("bidStatus");
 const bidStatusOverlay = document.getElementById("bidStatusOverlay");
 const bidInputStatus = document.getElementById("bidInputStatus");
 const highestBid = document.getElementById("highestBid");
+const sellerOutput = document.getElementById("sellerOutput");
+const seller = document.getElementById("seller");
 
 let id = params.get("id");
-const url = `https://v2.api.noroff.dev/auction/listings/${id}?_bids=true`
+const url = `https://v2.api.noroff.dev/auction/listings/${id}?_bids=true`;
 const url2 = `https://v2.api.noroff.dev/auction/listings/${id}`;
+const url3 = `https://v2.api.noroff.dev/auction/listings/${id}?_seller=true`;
 
 
 let bidsCollection = [];
@@ -39,6 +44,32 @@ async function getHighestBid() {
 getHighestBid();
 
 
+if(token && email) {
+    sellerOutput.style.display = "flex";
+    seller.style.display = "flex";
+} else {
+    sellerOutput.style.display = "none";
+    seller.style.display = "none";
+}
+
+
+async function getSeller() {
+    try {
+        const response = await fetch(url3);
+        const responseData = await response.json();
+        sellerOutput.innerHTML = responseData.data.seller.name;
+        function viewProfile() {
+            window.location.href = `/html/profile/profile.html?name=${responseData.data.seller.name}`
+        }
+        sellerOutput.addEventListener("click", viewProfile);
+    } catch(error) {
+        console.error(error);
+    }
+}
+
+getSeller();
+
+
 async function getListingById() {
     try {
         const response = await fetch(url);
@@ -60,7 +91,7 @@ async function getImages() {
         imagesOutput.innerHTML = responseData.data.media.map(listing => {
             return `
             <div class="my-2 flex flex-col items-center">
-            <img src=${listing.url}
+            <img class="w-full object-cover" src=${listing.url}>
             </div>
             `
         }).join(" ");
@@ -92,6 +123,7 @@ function listDetailedItem(listing, out) {
     out.innerHTML = newDiv;
 
 
+
     // Bid Overlay
     const bidOverlayButton = document.getElementById("bidOverlayButton");
 
@@ -99,6 +131,11 @@ function listDetailedItem(listing, out) {
 
     function openBidOverlay() {
         bidOverlay.style.display = "flex";
+    }
+    if (token && email) {
+        bidOverlayButton.style.display = "flex";
+    } else {
+        bidOverlayButton.style.display = "none";
     }
 }
 
@@ -114,6 +151,9 @@ function closeBidOverlay() {
 
 
 // Add Bid
+
+
+
 
 
 async function addBid() {
@@ -132,15 +172,11 @@ async function addBid() {
         const responseData = await response.json();
 
         if(response.ok) {
-            bidStatus.innerHTML = "Bid has been added"
+            bidStatus.innerHTML = "Adding bid..."
             bidStatusOverlay.style.display = "flex";
-            bidOverlay.style.display = "none";
             setTimeout(() => {
-                bidStatusOverlay.style.opacity = "0";
+                location.reload();
             }, 1000);
-            setTimeout(() => {
-                bidStatusOverlay.style.display = "none";
-            }, 2100);
         }
         else {
             bidInputStatus.innerHTML = responseData.errors[0].message;
@@ -153,3 +189,8 @@ async function addBid() {
 }
 
 confirmBidButton.addEventListener("click", addBid);
+
+
+
+// Go to profile
+

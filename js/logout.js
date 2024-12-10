@@ -1,5 +1,4 @@
-const ifLoggedIn = () => {
-    const logOutButton = document.getElementById("logout");
+export const ifLoggedIn = () => {
     const logOutButton2 = document.getElementById("logout2");
     const logInButton = document.getElementById("login");
     const avatarElement = document.getElementById("profileLink");
@@ -9,19 +8,15 @@ const ifLoggedIn = () => {
 
     if (token && email) {
         avatarElement.style.display = "block";
-        logInButton.style.display = "none";
-        logOutButton.addEventListener("click", () => {
-            localStorage.removeItem("token");
-            localStorage.removeItem("email");
-            localStorage.removeItem("name");
-            window.location = "index.html";
-        });
         logOutButton2.addEventListener("click", () => {
             localStorage.removeItem("token");
             localStorage.removeItem("email");
             localStorage.removeItem("name");
-            window.location = "index.html";
+            window.location = "/html/index.html";
         });
+    } else {
+        creditsLink.style.display = "none";
+        createListingLink.style.display = "none";
     }
 }
 
