@@ -42,7 +42,7 @@ export const listItemTemplate = (listing) => {
         }).slice(0, 1);
     return `<a href="details.html?id=${listing.id}" class="w-full bg-blue50 h-48 overflow-hidden">
             <div id="postElement" class="flex flex-col justify-center items-center">
-            <h2 class="bg-blue50 h-16 w-full content-center text-gray30 overflow-hidden text-center">${listing.title}</h2>
+            <h2 class="bg-blue50 h-16 w-full content-center text-gray30 overflow-hidden text-center w-4/5">${listing.title}</h2>
             <div class="h-24 w-5/6 mb-2 bg-gray70 object-contain overflow-hidden content-center">${imagesOutput}</div>
             </div>
             </a>`;
@@ -84,7 +84,7 @@ async function getCredits() {
             }
         });
         const responseData = await response.json();
-        console.log(responseData.data.credits)
+        console.log(responseData.data.credits);
         credits.innerHTML = responseData.data.credits;
 
     } catch(error) {

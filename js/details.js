@@ -14,6 +14,14 @@ const bidInputStatus = document.getElementById("bidInputStatus");
 const highestBid = document.getElementById("highestBid");
 const sellerOutput = document.getElementById("sellerOutput");
 const seller = document.getElementById("seller");
+const maybeDeleteListingButton = document.getElementById("maybeDeleteListingButton");
+const editListingButton = document.getElementById("editListingButton");
+const deleteOverlay = document.getElementById("deleteOverlay");
+const deleteListingButton = document.getElementById("deleteListingButton");
+const closeDeleteOverlayButton = document.getElementById("closeDeleteOverlayButton");
+const closeDeleteOverlayButton2 = document.getElementById("closeDeleteOverlayButton2");
+const deleteStatus = document.getElementById("deleteStatus");
+const deleteLoading = document.getElementById("deleteLoading");
 
 let id = params.get("id");
 const url = `https://v2.api.noroff.dev/auction/listings/${id}?_bids=true`;
@@ -202,5 +210,56 @@ confirmBidButton.addEventListener("click", addBid);
 
 
 
-// Go to profile
+// Open delete overlay
 
+maybeDeleteListingButton.addEventListener("click", openDeleteOverlay);
+closeDeleteOverlayButton.addEventListener("click", closeDeleteOverlay);
+closeDeleteOverlayButton2.addEventListener("click", closeDeleteOverlay);
+
+function openDeleteOverlay() {
+    deleteOverlay.style.display = "flex";
+}
+
+function closeDeleteOverlay() {
+    deleteOverlay.style.display = "none";
+}
+
+
+
+// Delete listing
+
+deleteListingButton.addEventListener("click", deleteListing);
+
+async function deleteListing() {
+    try {
+        const response = await fetch(url2, {
+            method: "DELETE",
+            headers: {
+                "content-type": "application/json",
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+                "X-Noroff-API-Key": `178dd2f7-0bd8-4d9b-9ff9-78d8d5ac9bc9`
+            }
+        });
+        deleteListingButton.style.display = "none";
+        closeDeleteOverlayButton.style.display = "none";
+        closeDeleteOverlayButton2.style.display = "none";
+        deleteLoading.style.display = "flex";
+        deleteStatus.innerHTML = "Deleting..."
+        setTimeout(() => {
+            window.location.href = `/html/profile/profile.html?name=${localStorage.getItem("name")}`;
+        }, 1000);
+
+    } catch(error) {
+        console.error(error);
+    }
+};
+
+
+
+// Edit listing
+
+editListingButton.addEventListener("click", editListing);
+
+function editListing() {
+    window.location.href = `edit.html?id=${id}`;
+}

@@ -26,6 +26,12 @@ const descriptionLength = document.getElementById("descriptionLength");
 
 async function createListing() {
     try {
+        if (listingDay.value.length == 1) {
+            listingDay.value = "0" + listingDay.value;
+        }
+        if (listingMonth.value.length == 1) {
+            listingMonth.value = "0" + listingMonth.value;
+        }
         const response = await fetch(`https://v2.api.noroff.dev/auction/listings`, {
             method: "POST",
             body: JSON.stringify({
