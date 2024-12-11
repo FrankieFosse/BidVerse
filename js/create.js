@@ -21,6 +21,8 @@ const confirmMedia = document.getElementById("confirmMedia");
 const mediaContainer = document.getElementById("mediaContainer");
 const confirmMediaStatus = document.getElementById("confirmMediaStatus");
 const mediaAmountStatus = document.getElementById("mediaAmountStatus");
+const overlayBlur = document.getElementById("overlayBlur");
+const descriptionLength = document.getElementById("descriptionLength");
 
 async function createListing() {
     try {
@@ -90,11 +92,25 @@ cancelMedia2.addEventListener("click", closeMediaOverlay);
 
 function openMediaOverlay() {
     mediaOverlay.style.display = "flex";
+    overlayBlur.style.display = "flex";
 }
 
 function closeMediaOverlay() {
     mediaOverlay.style.display = "none";
     confirmMediaStatus.style.opacity = "0";
+    overlayBlur.style.display = "none";
+}
+
+listingDescription.addEventListener("keyup", updateDescriptionLength);
+
+function updateDescriptionLength() {
+    descriptionLength.innerHTML = listingDescription.value.length;
+    if (listingDescription.value.length > 280) {
+        descriptionLength.classList.add("text-red30");
+    }
+    if (listingDescription.value.length <= 280) {
+        descriptionLength.classList.remove("text-red30");
+    }
 }
 
 
@@ -124,11 +140,11 @@ function myFunction(counter) {
         <label for="mediaURL${counter}" class="mt-6 text-gray30">Media-URL</label>
         <div class="myURLdiv">
             <textarea id="mediaURL${counter}" placeholder="Required" 
-                class="px-2 mb-6 py-1 rounded h-12 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300"></textarea>
+                class="px-2 mb-6 py-1 rounded h-12 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300 border-2 border-transparent text-gray70 text-sm"></textarea>
         </div>
         <label for="mediaALT${counter}" class="mt-6 text-gray30">Media Alt-text / description</label>
         <input type="text" id="mediaALT${counter}" placeholder="Required" 
-            class="px-2 py-1 mb-6 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
+            class="px-2 py-1 mb-6 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300 border-2 border-transparent text-gray70 text-sm">
     `;
 
     return mediaDiv;
@@ -213,6 +229,7 @@ function loopElements() {
         confirmMediaStatus.style.opacity = "0";
         confirmMediaStatus.innerHTML = "";
         mediaOverlay.style.display = "none";
+        overlayBlur.style.display = "none";
         mediaAmountStatus.style.display = "flex";
         mediaAmountStatus.innerHTML = mediaCollection.length + " media element(s) added";
     }

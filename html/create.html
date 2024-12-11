@@ -43,51 +43,62 @@
 
     <main>
 
-    <section class="bg-brown50 mt-12 py-2 flex flex-col items-center">
-        <form id="create" class="bg-brown30 flex flex-col h-full w-3/4 px-4 items-center">
+        
+
+    <section class="bg-brown70 mt-12 py-2 flex flex-col items-center">
+        <form id="create" class="bg-gray-800 flex flex-col h-full w-3/4 px-4 items-center">
             <label for="title" class="mt-6 text-gray30">Title</label>
-            <input type="text" id="title" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
-            <div id="addMediaButton" class="flex flex-row mt-6 text-gray30 text-lg items-center bg-brown50 bg-opacity-25 px-4 py-1 hover:scale-105 hover:bg-opacity-75 duration-300 cursor-pointer">
+            <input type="text" id="title" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300 text-gray70">
+            <div id="addMediaButton" class="flex flex-row mt-6 text-gray30 text-lg items-center bg-blue50 bg-opacity-75 px-4 py-1 hover:scale-105 hover:bg-opacity-75 duration-300 cursor-pointer">
             <i class="fa-solid fa-folder-plus mr-2"></i>
             <p>Media</p>
             </div>
-            <div id="mediaAmountStatus" class="text-gray30 bg-brown70 bg-opacity-50 mt-2 px-2 py-1 hidden">
+            <div id="mediaAmountStatus" class="text-gray30 bg-blue50 font-light bg-opacity-25 text-sm mt-2 px-2 py-1 text-center hidden">
             </div>
             <label for="description" class="mt-6 text-gray30">Description</label>
-            <textarea id="description" class="px-2 py-1 rounded h-36 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300"></textarea>
+                <div class="flex flex-row">
+                    <p id="descriptionLength" class="font-light text-sm mr-1">0</p><p class="font-light text-sm"> / 280</p>
+                </div>
+            <textarea id="description" class="px-2 py-1 rounded h-36 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300 text-gray70 text-sm font-light"></textarea>
             <label for="tags" class="mt-6 text-gray30">Tags (separate with Space)</label>
-            <textarea id="tags" class="px-2 py-1 rounded h-24 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300"></textarea>
+            <textarea id="tags" class="px-2 py-1 rounded h-24 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300 text-gray70"></textarea>
             <label for="day" class="mt-6 text-gray30">Ends at date</label>
             <div class="flex flex-row content-center justify-between">
-            <input type="text" placeholder="DD" id="day" class="mr-1 px-2 py-1 rounded w-2/5 outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
-            <input type="text" placeholder="MM" id="month" class="px-2 py-1 rounded w-2/5 outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
-            <input type="text" placeholder="YYYY" id="year" class="ml-1 px-2 py-1 rounded w-3/5 outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
+            <input type="text" placeholder="DD" id="day" class="mr-1 px-2 py-1 rounded w-2/5 outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300 text-gray70">
+            <input type="text" placeholder="MM" id="month" class="px-2 py-1 rounded w-2/5 outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300 text-gray70">
+            <input type="text" placeholder="YYYY" id="year" class="ml-1 px-2 py-1 rounded w-3/5 outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300 text-gray70">
             </div>
             <div id="createStatus" class="text-gray30 text-center pt-5 opacity-0 mb-5">Status</div>
         </form>
         <button id="createListingButton" class="bg-primary50 text-gray30 px-3 py-1 mt-2 outline-none hover:scale-110 hover:bg-primary30 duration-300">Create Listing</button>
     </section>
-    <section id="mediaOverlay" class="mt-12 flex flex-col items-center absolute w-full h-full top-0 hidden">
-        <form class="bg-brown70 flex flex-col w-full items-center h-full">
+
+
+
+
+    </main>
+
+    <section id="overlayBlur" class="fixed bg-gray70 backdrop-blur w-full h-full top-0 hidden bg-opacity-75"></section>
+
+    <section id="mediaOverlay" class="backdrop-blur bg-red-500 mt-12 flex flex-col items-center absolute w-full h-full top-0 hidden">
+        <form class="bg-gray70 flex flex-col w-full items-center h-full">
             <div class="flex flex-col ml-auto mr-6">
                 <i id="cancelMedia2" class="fa-solid fa-xmark text-gray30 mt-5 hover:scale-125 hover:bg-opacity-100 duration-300 cursor-pointer px-1.5 py-1 rounded-full bg-brown30 bg-opacity-50"></i>
             </div>
             <div class="flex flex-row justify-center items-center">
-                <button id="removeMediaButton" type="button" class="bg-gray30 p-2 px-3 rounded-l bg-opacity-50" disabled><i class="fa-solid fa-minus"></i></button>
-                <div id="mediaAmount" class="bg-gray30 bg-opacity-90 p-2 px-4">0</div>
-                <button id="openMediaButton" type="button" class="bg-gray30 p-2 px-3 rounded-r"><i class="fa-solid fa-plus"></i></button>
+                <button id="removeMediaButton" type="button" class="bg-gray30 p-2 px-3 rounded-l bg-opacity-50 text-gray70" disabled><i class="fa-solid fa-minus"></i></button>
+                <div id="mediaAmount" class="bg-gray30 bg-opacity-90 p-2 px-4 text-gray70">0</div>
+                <button id="openMediaButton" type="button" class="bg-gray30 p-2 px-3 rounded-r text-gray70"><i class="fa-solid fa-plus"></i></button>
             </div>
-            <ul id="mediaContainer" class="bg-brown70 w-full flex flex-col justify-center items-center">
+            <ul id="mediaContainer" class="bg-gray70 w-full flex flex-col justify-center items-center">
             </ul>
-            <div class="grid grid-cols-3 grid-rows-2 justify-items-center bg-brown70 w-full h-max pb-6 justify-center items-center content-center">
+            <div class="flex flex-col justify-items-center bg-gray70 w-full h-max pb-6 justify-center items-center content-center">
+            <div id="confirmMediaStatus" class="row-start-2 col-start-2 text-gray30 opacity-0 cursor-default duration-700 mt-2">Value</div>
+            <div id="confirmMedia" class="row-start-2 col-start-3 bg-primary50 text-gray30 px-3 py-1 w-3/5 outline-none cursor-pointer hover:scale-110 hover:bg-primary30 duration-300 text-center my-4">Confirm</div>
             <button id="cancelMedia" type="button" class="row-start-2 col-start-1 bg-red50 text-gray30 px-3 py-1 w-3/5 outline-none hover:scale-110 hover:bg-red30 duration-300 text-center">Cancel</button>
-            <div id="confirmMediaStatus" class="row-start-2 col-start-2 text-gray30 opacity-0 cursor-default duration-700">Value</div>
-            <div id="confirmMedia" class="row-start-2 col-start-3 bg-primary50 text-gray30 px-3 py-1 w-3/5 outline-none cursor-pointer hover:scale-110 hover:bg-primary30 duration-300 text-center">Confirm</div>
             </div>
         </form>
     </section>
-
-    </main>
 
 </body>
 </html>

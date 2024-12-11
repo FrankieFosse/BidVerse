@@ -109,13 +109,13 @@ function listDetailedItem(listing, out) {
     let newDiv = `
     <div class="text-gray30 bg-gray70 mt-12 p-2 flex flex-col items-center">
     <div class="flex flex-row justify-evenly w-full items-center mb-4">
-        <h1 class="text-xl">${listing.data.title}</h1>
+        <h1 class="text-xl w-3/5 overflow-hidden">${listing.data.title}</h1>
             <div class="flex flex-col items-center">
             <p class="text-sm">Number of bids</p>
             <p class="bg-primary50 rounded-full w-12 h-12 text-center flex flex-col justify-center">${listing.data._count.bids}</p>
             </div>
     </div>
-    <p class="text-sm font-thin text-center">${listing.data.description? listing.data.description : ""}</p>
+    <p class="text-sm font-thin text-center w-4/5 overflow-hidden">${listing.data.description? listing.data.description : ""}</p>
     <button id="bidOverlayButton" class="bg-primary50 w-max px-4 py-1 mt-4 hover:scale-110 hover:bg-primary30 duration-300">Add bid</button>
     <p class="text-center">Deadline: ${listing.data.endsAt.slice(0, 10)}</p>
     </div>
@@ -127,17 +127,28 @@ function listDetailedItem(listing, out) {
     // Bid Overlay
     const bidOverlayButton = document.getElementById("bidOverlayButton");
 
+
+
+
+
     bidOverlayButton.addEventListener("click", openBidOverlay)
 
     function openBidOverlay() {
         bidOverlay.style.display = "flex";
     }
+    let myName = localStorage.getItem("name");
+    if (sellerOutput.innerHTML == myName) {
+        bidOverlayButton.setAttribute("disabled", true);
+        bidOverlayButton.classList.add("opacity-0");
+    }
     if (token && email) {
         bidOverlayButton.style.display = "flex";
-    } else {
+    }
+    else {
         bidOverlayButton.style.display = "none";
     }
 }
+
 
 closeBidOverlayButton.addEventListener("click", closeBidOverlay);
 cancelBidButton.addEventListener("click", closeBidOverlay);
@@ -151,7 +162,6 @@ function closeBidOverlay() {
 
 
 // Add Bid
-
 
 
 
