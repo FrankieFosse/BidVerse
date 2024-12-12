@@ -114,6 +114,21 @@ getImages();
 getListingById();
 
 function listDetailedItem(listing, out) {
+
+    let tagsOutput = [];
+    for (let tag of listing.data.tags) {
+        //if (listing.data.tags.length >= 1) {
+        //tagsOutput.push("#" + tag);
+        //}
+        if (listing.data.tags[0] == "") {
+            tagsOutput.push("");
+        } else {
+            tagsOutput.push("#" + tag);
+        }
+    }
+    
+    console.log(tagsOutput);
+
     let newDiv = `
     <div class="text-gray30 bg-gray70 mt-12 p-2 flex flex-col items-center">
     <div class="flex flex-row justify-evenly w-full items-center mb-4">
@@ -123,7 +138,8 @@ function listDetailedItem(listing, out) {
             <p class="bg-primary50 rounded-full w-12 h-12 text-center flex flex-col justify-center">${listing.data._count.bids}</p>
             </div>
     </div>
-    <p class="text-sm font-thin text-center w-4/5 overflow-hidden">${listing.data.description? listing.data.description : ""}</p>
+    <p class="text-sm font-light text-center w-4/5 overflow-hidden">${listing.data.description? listing.data.description : ""}</p>
+    <p class="text-sm font-thin">${tagsOutput.join(" ")}</p>
     <button id="bidOverlayButton" class="bg-primary50 w-max px-4 py-1 mt-4 hover:scale-110 hover:bg-primary30 duration-300">Add bid</button>
     <p class="text-center">Deadline: ${listing.data.endsAt.slice(0, 10)}</p>
     </div>
@@ -148,6 +164,8 @@ function listDetailedItem(listing, out) {
     if (sellerOutput.innerHTML == myName) {
         bidOverlayButton.setAttribute("disabled", true);
         bidOverlayButton.classList.add("opacity-0");
+        maybeDeleteListingButton.style.display = "block";
+        editListingButton.style.display = "block";
     }
     if (token && email) {
         bidOverlayButton.style.display = "flex";

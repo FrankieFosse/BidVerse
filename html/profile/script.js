@@ -45,15 +45,19 @@ function listProfile(profile, out) {
     <h1 class="w-3/5 text-3xl text-gray30">${profile.data.name}</h1>
     <p class="opacity-50 mb-5 text-gray30">${profile.data.email}</p>
     <div class="flex flex-col justify-center items-center content-center w-full">
-    <img src=${profile.data.avatar.url} class="rounded-full h-48 w-48">
+    <img src=${profile.data.avatar.url? profile.data.avatar.url : "/images/avatar-placeholder.jpg"} class="rounded-full h-48 w-48 object-cover">
     <i id="editAvatarButton" class="fa-solid fa-pen-to-square text-gray30 mt-4 opacity-75 text-lg hover:scale-110 hover:opacity-100 duration-300 cursor-pointer bg-gray70 w-8 h-8 rounded items-center justify-center content-center self-center hidden"></i>
     </div>
     </div>
 
     <div class="flex flex-col text-center text-gray-100 justify-around items-center w-4/5">
         <p class="w-32 bg-primary50 rounded-full">Credits: ${profile.data.credits}</p>
+        <p class="mt-4 bg-primary70 rounded-full w-32">Wins: ${profile.data._count.wins}</p>
+        <p class="mt-4 bg-blue50 rounded-full w-32">Listings: ${profile.data._count.listings}</p>
     </div>
+
     </section>
+
     `;
     out.innerHTML = newDiv;
 

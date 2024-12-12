@@ -38,7 +38,7 @@ getProfileByName();
 
 function listProfile(profile, out) {
     let newDiv = `
-    <img src=${profile.data.avatar.url} class="rounded-full h-8 w-8 border-gray30 border-solid border-2">
+    <img src=${profile.data.avatar.url} class="rounded-full h-8 w-8 border-gray30 border-solid border-2 object-cover">
     `;
     out.innerHTML = newDiv;
 }

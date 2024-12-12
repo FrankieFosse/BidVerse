@@ -49,12 +49,13 @@
         <form id="create" class="bg-gray-700 flex flex-col h-full w-3/4 px-4 items-center">
             <label for="title" class="mt-6 text-gray30">Title</label>
             <input type="text" id="title" class="px-2 py-1 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300 text-gray70">
-            <div id="addMediaButton" class="flex flex-row mt-6 text-gray30 text-lg items-center bg-blue50 bg-opacity-75 px-4 py-1 hover:scale-105 hover:bg-opacity-75 duration-300 cursor-pointer">
+            <div id="addMediaButton" class="flex flex-row mt-6 text-gray30 text-lg items-center bg-blue50 bg-opacity-75 px-4 py-1 hover:scale-105 hover:bg-opacity-100 duration-300 cursor-pointer">
             <i class="fa-solid fa-pen-to-square mr-2"></i>
             <p>Media</p>
             </div>
             <div id="mediaAmountStatus" class="text-gray30 bg-blue50 font-light bg-opacity-25 text-sm mt-2 px-2 py-1 text-center">
             </div>
+            <button id="removeAllMediaButton" type="button" class="bg-red50 px-3 py-1 mt-2 hover:scale-105 hover:bg-red30 duration-300 text-sm font-light"><i class="fa-solid fa-trash-can mr-2"></i>Remove all media</button>
             <label for="description" class="mt-6 text-gray30">Description</label>
                 <div class="flex flex-row">
                     <p id="descriptionLength" class="font-light text-sm mr-1">0</p><p class="font-light text-sm"> / 280</p>
@@ -70,7 +71,7 @@
             </div>
             <div id="createStatus" class="text-gray30 text-center pt-5 opacity-0 mb-5">Status</div>
         </form>
-        <button id="createListingButton" class="bg-primary50 text-gray30 px-3 py-1 mt-2 outline-none hover:scale-110 hover:bg-primary30 duration-300">Create Listing</button>
+        <button id="updateListingButton" class="bg-primary50 text-gray30 px-3 py-1 mt-2 outline-none hover:scale-110 hover:bg-primary30 duration-300">Update Listing</button>
     </section>
 
 

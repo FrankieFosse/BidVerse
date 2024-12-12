@@ -32,12 +32,15 @@ async function createListing() {
         if (listingMonth.value.length == 1) {
             listingMonth.value = "0" + listingMonth.value;
         }
+        let tagsCollection = listingTags.value;
+        const separatedTagsCollection = tagsCollection.split(" ");
+
         const response = await fetch(`https://v2.api.noroff.dev/auction/listings`, {
             method: "POST",
             body: JSON.stringify({
                 title: listingTitle.value,
                 description: listingDescription.value,
-                tags: [listingTags.value],
+                tags: separatedTagsCollection,
                 media: listingMediaURL, listingMediaALT
                 ,
                 endsAt: listingYear.value + "-" + listingMonth.value + "-" + listingDay.value + "T00:00:00.000Z"
