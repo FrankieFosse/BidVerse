@@ -94,13 +94,10 @@ async function getImages() {
         const imagesOutput = document.getElementById("imagesOutput")
         const response = await fetch(url);
         const responseData = await response.json();
-        console.log(responseData)
 
         imagesOutput.innerHTML = responseData.data.media.map(listing => {
             return `
-            <div class="my-2 flex flex-col items-center">
-            <img class="w-full object-cover" src=${listing.url}>
-            </div>
+            <img class="h-full object-cover col-span-1" src=${listing.url}>
             `
         }).join(" ");
 
@@ -126,11 +123,9 @@ function listDetailedItem(listing, out) {
             tagsOutput.push("#" + tag);
         }
     }
-    
-    console.log(tagsOutput);
 
     let newDiv = `
-    <div class="text-gray30 bg-gray70 mt-12 p-2 flex flex-col items-center">
+    <div class="text-gray30 mt-12 p-2 flex flex-col items-center">
     <div class="flex flex-row justify-evenly w-full items-center mb-4">
         <h1 class="text-xl w-3/5 overflow-hidden">${listing.data.title}</h1>
             <div class="flex flex-col items-center">

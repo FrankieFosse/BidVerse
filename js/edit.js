@@ -20,6 +20,7 @@ const mediaAmountStatus = document.getElementById("mediaAmountStatus");
 const overlayBlur = document.getElementById("overlayBlur");
 const descriptionLength = document.getElementById("descriptionLength");
 const removeAllMediaButton = document.getElementById("removeAllMediaButton");
+const goBackButton = document.getElementById("goBackButton");
 let tagsCollection = "";
 
 let params = new URL (document.location).searchParams;
@@ -46,7 +47,6 @@ async function fetchListings() {
         listingDescription.value = responseData.data.description;
         tagsCollection = responseData.data.tags.join(" ");
         let separatedTagsCollection = tagsCollection;
-        console.log(separatedTagsCollection);
         listingTags.value = separatedTagsCollection;
         listingDay.value = responseData.data.endsAt.slice(8, 10);
         listingMonth.value = responseData.data.endsAt.slice(5, 7);
@@ -129,6 +129,8 @@ async function initializeMedia() {
     if (mediaCollection.length === 1) {
         removeMediaButton.setAttribute("disabled", true);
         removeMediaButton.classList.add("bg-opacity-50");
+        mediaContainer.classList.remove("grid-cols-2");
+        mediaContainer.classList.add("grid-cols-1");
     } else {
         removeMediaButton.removeAttribute("disabled");
         removeMediaButton.classList.remove("bg-opacity-50");
@@ -146,9 +148,36 @@ function addMediaToContainer() {
     mediaAmount.innerHTML = mediaCollection.length;
 
     // Enable remove button if more than one media exists
+    if (mediaCollection.length === 1) {
+        removeMediaButton.setAttribute("disabled", true);
+        removeMediaButton.classList.add("bg-opacity-50");
+        mediaContainer.classList.remove("grid-cols-2");
+        mediaContainer.classList.add("grid-cols-1");
+    }
     if (mediaCollection.length > 1) {
         removeMediaButton.removeAttribute("disabled");
         removeMediaButton.classList.remove("bg-opacity-50");
+    }
+
+    if (mediaCollection.length === 2 && window.innerWidth > 925) {
+        mediaContainer.classList.remove("grid-cols-1");
+        mediaContainer.classList.remove("grid-cols-3");
+        mediaContainer.classList.add("grid-cols-2");
+    }
+
+    if (mediaCollection.length > 2 && window.innerWidth > 1310) {
+        mediaContainer.classList.remove("grid-cols-2");
+        mediaContainer.classList.add("grid-cols-3");
+    }
+
+    if (window.innerWidth < 925) {
+        mediaContainer.classList.remove("grid-cols-2");
+        mediaContainer.classList.add("grid-cols-1");
+    }
+
+    if (window.innerWidth < 1310 && window.innerWidth > 925) {
+        mediaContainer.classList.remove("grid-cols-3");
+        mediaContainer.classList.add("grid-cols-2");
     }
 }
 
@@ -166,6 +195,27 @@ function removeMediaFromContainer() {
 
         // Update the media amount status
         mediaAmount.innerHTML = mediaCollection.length;
+
+        if (mediaCollection.length === 2 && window.innerWidth > 925) {
+            mediaContainer.classList.remove("grid-cols-1");
+            mediaContainer.classList.remove("grid-cols-3");
+            mediaContainer.classList.add("grid-cols-2");
+        }
+    
+        if (mediaCollection.length > 2 && window.innerWidth > 1310) {
+            mediaContainer.classList.remove("grid-cols-2");
+            mediaContainer.classList.add("grid-cols-3");
+        }
+    
+        if (window.innerWidth < 925) {
+            mediaContainer.classList.remove("grid-cols-2");
+            mediaContainer.classList.add("grid-cols-1");
+        }
+    
+        if (window.innerWidth < 1310 && window.innerWidth > 925) {
+            mediaContainer.classList.remove("grid-cols-3");
+            mediaContainer.classList.add("grid-cols-2");
+        }
 
         // Disable the remove button if only one media remains
         if (mediaCollection.length === 1) {
@@ -346,7 +396,10 @@ removeAllMediaButton.addEventListener("click", () => {
     listingMediaURL = [];
     listingMediaALT = [];
 
-    console.log("All media elements removed:", listingMediaURL, listingMediaALT);
+});
+
+goBackButton.addEventListener("click", () => {
+    history.back()
 });
 
 

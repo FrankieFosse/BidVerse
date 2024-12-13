@@ -28,7 +28,6 @@ async function updateAvatar() {
             }
         })
         const responseData = await response.json();
-        console.log(responseData);
 
         if(response.ok) {
             avatarOverlay.style.display = "none";

@@ -25,7 +25,6 @@ async function getProfileByName() {
             }
         });
         const responseData = await response.json();
-        document.title = responseData.data.name + " - BidVerse";
         listProfile(responseData, avatar);
     } catch(error) {
         console.error(error);

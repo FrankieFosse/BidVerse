@@ -1,8 +1,11 @@
-import {listItem, homeOutput} from "./utils.js";
+import {listItem, listNothing} from "./utils.js";
 
-let api = `https://v2.api.noroff.dev/auction/listings`
+let homeOutput = document.getElementById("homeOutput");
+let params = new URL (document.location).searchParams;
+const search = document.getElementById("search");
+let api = `https://v2.api.noroff.dev/auction/listings?_active=true`;
 let collection = [];
-let out = document.getElementById("homeOutput")
+const searchButton = document.getElementById("searchButton");
 
 async function fetchListings() {
     try {
@@ -11,12 +14,14 @@ async function fetchListings() {
             throw new Error("Could not fetch data");
         };
         const responseData = await response.json();
-        console.log(responseData.data);
 
         for (let item of responseData.data) {
             collection.push(item);
         }
-        listItem(collection, homeOutput);
+        const sortedCollection = collection.toSorted();
+        console.log(collection);
+        console.log(sortedCollection);
+        listItem(sortedCollection, homeOutput);
 
     }
     catch(error) {
@@ -26,19 +31,55 @@ async function fetchListings() {
 
 fetchListings();
 
+search.addEventListener("keyup", function(event) {
+    if (event.key === "Enter") {
+        fetchSearchListings();
+    }
+})
+
+async function fetchSearchListings() {
+    try {
+        let query = search.value;
+        if (query == "") {
+            homeOutput.classList.add("grid");
+            homeOutput.classList.remove("flex");
+            homeOutput.classList.remove("flex-col");
+            homeOutput.classList.remove("items-center");
+            collection = [];
+            fetchListings();
+        } else {
+        let searchApi = `https://v2.api.noroff.dev/auction/listings/search?q=${query}`;
+        const response = await fetch(searchApi);
+        if (!response.ok) {
+            throw new Error("Could not fetch search data");
+        };
+        const responseData = await response.json();
+
+        if (responseData.data.length == 0) {
+            homeOutput.classList.remove("grid");
+            homeOutput.classList.add("flex");
+            homeOutput.classList.add("flex-col");
+            homeOutput.classList.add("items-center");
+            collection = [1];
+            listNothing(collection, homeOutput);
+        } else {
+            homeOutput.classList.add("grid");
+            homeOutput.classList.remove("flex");
+            homeOutput.classList.remove("flex-col");
+            homeOutput.classList.remove("items-center");
+            collection = [];
+
+            for (let item of responseData.data) {
+                collection.push(item);
+            }
+            listItem(collection, homeOutput);
+            }
+        }
 
 
-
-// Search function
-const search = document.getElementById("search");
-search.addEventListener("keyup", filterListings);
-
-function filterListings() {
-    const filterQuery = search.value;
-
-    const filtered = collection.filter((listing)=>{
-        return listing.title.toUpperCase().indexOf(filterQuery.toUpperCase()) > -1;
-    });
-
-    listItem (filtered, out);
+    } catch(error) {
+        console.error(error);
+    }
 }
+
+searchButton.addEventListener("click", fetchSearchListings);

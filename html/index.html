@@ -14,16 +14,18 @@
     <script type="module" src="/js/menu.js"></script>
     <script type="module" src="/js/avatar.js"></script>
 </head>
-<body class="bg-gray50 font-montserrat font-semibold text-gray30">
+<body class="bg-gray70 font-montserrat font-semibold text-gray30">
     
-    <header class="bg-brown70 bg-opacity-90 backdrop-blur-sm fixed w-full z-20 top-0">
+    <header class="bg-gray70 bg-opacity-90 backdrop-blur-sm fixed w-full z-20 top-0">
         
         <nav class="h-12 content-center text-gray30">
         <ul class="flex flex-row w-full items-center justify-between">
             <li class="w-10 hover:scale-110 duration-300 flex flex-col items-center bg-gray70 bg-opacity-75 p-1 rounded-full mx-4"><a href="/html/index.html"><img src="/images/BidVerse logo.png"></a></li>
+            <div class="flex flex-row justify-center items-center">
             <li id="profileLink" class="w-24 hover:scale-110 duration-300 hidden justify-items-center cursor-pointer"><div id="avatar"></div></li>
             <li id="hamburgerButton" class="w-max flex flex-col text-center bg-gray70 bg-opacity-75 hover:scale-110 duration-300 cursor-pointer mx-4"><i class="fa-solid fa-bars px-2 py-1 rounded-full"></i></li>
-            <li id="closeButton" class="w-max flex flex-col hidden text-center bg-gray70 bg-opacity-75 hover:scale-110 duration-300 cursor-pointer mx-4"><i class="fa-solid fa-xmark px-2 py-1 rounded-full"></i></li>
+            <li id="closeButton" class="w-max flex flex-col hidden text-center bg-gray70 bg-opacity-75 hover:scale-110 duration-300 cursor-pointer mx-4"><i class="fa-solid fa-xmark px-2 py-1 mr-0.5 rounded-full"></i></li>
+            </div>
         </ul>
 
         <ul id="hamburgerMenu" class="absolute bg-slate-800 backdrop-blur-xl w-2/3 top-12 duration-500 ease-in-out z-10 -right-full">
@@ -38,18 +40,17 @@
 
     </header>
 
-
-
     <main>
 
-    <section class="bg-gray-700 h-12 flex flex-col justify-center content-center items-center mt-12">
-        <input id="search" type="text" placeholder="Search" class="w-3/4 px-2 outline-none rounded-full text-center text-gray70">
+    <section class="bg-gray-700 h-12 flex flex-row justify-center content-center items-center mt-12">
+        <input id="search" type="text" class="w-3/4 px-2 py-1 outline-none rounded-full text-center text-gray70">
+        <button id="searchButton" class="bg-primary50 px-2 py-0.5 ml-4 hover:scale-105 hover:bg-primary30 duration-300"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
     </section>
 
         <div id="carousel"></div>
 
-    <section class="flex flex-col bg-gray70">
-        <div class="grid grid-cols-2 gap-4 justify-items-center m-4" id="homeOutput"></div>
+    <section class="flex flex-col bg-gray70 text-gray30">
+        <div class="grid grid-cols-2 gap-4 justify-items-center m-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7" id="homeOutput"></div>
     </section>
 
     </main>

@@ -28,8 +28,7 @@ async function getProfileByName() {
             }
         });
         const responseData = await response.json();
-        console.log(responseData);
-        document.title = responseData.data.name + " - BetVerse";
+        document.title = responseData.data.name + " - BidVerse";
         listProfile(responseData, outElement);
     } catch(error) {
         console.error(error);
@@ -40,8 +39,8 @@ getProfileByName();
 
 function listProfile(profile, out) {
     let newDiv = `
-    <section class="flex flex-col pb-5 bg-gray50 bg-opacity-50 w-full md:w-3/5 items-center">
-    <div class="bg-gray70 bg-opacity-75 mx-5 my-5 py-10 flex flex-col h-2/4 w-11/12 text-center items-center">
+    <section class="flex flex-col pb-5 bg-gray50 bg-opacity-50 w-full items-center">
+    <div class="bg-gray70 bg-opacity-75 mx-5 my-5 py-10 flex flex-col h-2/4 w-4/5 md:w-3/5 text-center items-center">
     <h1 class="w-3/5 text-3xl text-gray30">${profile.data.name}</h1>
     <p class="opacity-50 mb-5 text-gray30">${profile.data.email}</p>
     <div class="flex flex-col justify-center items-center content-center w-full">
@@ -100,7 +99,6 @@ async function getPostsByProfile() {
             }
         });
         const responseData = await response.json();
-        console.log(responseData)
 
         for (let item of responseData.data) {
             collection.push(item);

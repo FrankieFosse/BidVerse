@@ -23,6 +23,7 @@ const confirmMediaStatus = document.getElementById("confirmMediaStatus");
 const mediaAmountStatus = document.getElementById("mediaAmountStatus");
 const overlayBlur = document.getElementById("overlayBlur");
 const descriptionLength = document.getElementById("descriptionLength");
+const mediaOverlayForm = document.getElementById("mediaOverlayForm");
 
 async function createListing() {
     try {
@@ -52,7 +53,6 @@ async function createListing() {
             }
         })
         const responseData = await response.json();
-        console.log(responseData);
 
         if(response.ok) {
             createStatus.innerHTML = "Loading..."
@@ -139,7 +139,7 @@ function myFunction(counter) {
     // Create a new <li> element
     let mediaDiv = document.createElement("li");
     mediaDiv.id = `mediaElement${counter}`;
-    mediaDiv.className = "bg-brown50 p-3 mt-3 mx-6 text-center w-4/5";
+    mediaDiv.className = "bg-brown50 p-3 mt-3 text-center w-4/5 border-4 border-brown70";
 
     // Set its inner HTML
     mediaDiv.innerHTML = `
@@ -168,10 +168,33 @@ function addMediaToContainer() {
 
     mediaAmount.innerHTML = mediaCollection.length;
 
+    if (mediaCollection.length === 2 && window.innerWidth > 925) {
+        mediaContainer.classList.remove("grid-cols-1");
+        mediaContainer.classList.remove("grid-cols-3");
+        mediaContainer.classList.add("grid-cols-2");
+    }
+
+    if (mediaCollection.length > 2 && window.innerWidth > 1310) {
+        mediaContainer.classList.remove("grid-cols-2");
+        mediaContainer.classList.add("grid-cols-3");
+    }
+
+    if (window.innerWidth < 925) {
+        mediaContainer.classList.remove("grid-cols-2");
+        mediaContainer.classList.add("grid-cols-1");
+    }
+
+    if (window.innerWidth < 1310 && window.innerWidth > 925) {
+        mediaContainer.classList.remove("grid-cols-3");
+        mediaContainer.classList.add("grid-cols-2");
+    }
+
     // Enable/disable remove button based on collection size
     if (mediaCollection.length === 1) {
         removeMediaButton.setAttribute("disabled", true);
         removeMediaButton.classList.add("bg-opacity-50");
+        mediaContainer.classList.remove("grid-cols-2");
+        mediaContainer.classList.add("grid-cols-1");
     } else {
         removeMediaButton.removeAttribute("disabled");
         removeMediaButton.classList.remove("bg-opacity-50");
@@ -186,9 +209,32 @@ function removeMediaFromContainer() {
 
     mediaAmount.innerHTML = mediaCollection.length;
 
+    if (mediaCollection.length === 2 && window.innerWidth > 925) {
+        mediaContainer.classList.remove("grid-cols-1");
+        mediaContainer.classList.remove("grid-cols-3");
+        mediaContainer.classList.add("grid-cols-2");
+    }
+
+    if (mediaCollection.length > 2 && window.innerWidth > 1310) {
+        mediaContainer.classList.remove("grid-cols-2");
+        mediaContainer.classList.add("grid-cols-3");
+    }
+
+    if (window.innerWidth < 925) {
+        mediaContainer.classList.remove("grid-cols-2");
+        mediaContainer.classList.add("grid-cols-1");
+    }
+
+    if (window.innerWidth < 1310 && window.innerWidth > 925) {
+        mediaContainer.classList.remove("grid-cols-3");
+        mediaContainer.classList.add("grid-cols-2");
+    }
+
     if (mediaCollection.length === 1) {
         removeMediaButton.setAttribute("disabled", true);
         removeMediaButton.classList.add("bg-opacity-50");
+        mediaContainer.classList.remove("grid-cols-2");
+        mediaContainer.classList.add("grid-cols-1");
     }
     if (mediaCollection.length > 1) {
         removeMediaButton.removeAttribute("disabled");
