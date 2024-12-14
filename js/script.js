@@ -89,3 +89,10 @@ async function fetchSearchListings() {
 }
 
 searchButton.addEventListener("click", fetchSearchListings);
+
+
+
+// Modify search button
+if (window.innerWidth < 500) {
+    searchButton.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i>`
+}
