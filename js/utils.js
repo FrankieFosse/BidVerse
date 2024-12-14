@@ -33,7 +33,7 @@ export const listItemTemplate = (listing) => {
         }).slice(0, 1);
     return `<a href="details.html?id=${listing.id}" class="w-full bg-blue50 h-48 overflow-hidden hover:scale-105 hover:bg-blue30 duration-300">
             <div id="postElement" class="flex flex-col justify-center items-center">
-            <h2 class="h-16 w-full content-center text-gray30 overflow-hidden text-center w-4/5">${listing.title}</h2>
+            <h2 class="h-20 w-full content-center text-gray30 overflow-hidden text-center w-4/5">${listing.title}</h2>
             <div class="h-24 w-5/6 mb-2 bg-gray70 object-contain overflow-hidden content-center">${imagesOutput}</div>
             </div>
             </a>`;

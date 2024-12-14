@@ -47,7 +47,13 @@
         <button id="searchButton" class="bg-primary50 px-2 py-0.5 max-h-12 ml-4 hover:scale-105 hover:bg-primary30 duration-300 rounded"><i class="fa-solid fa-magnifying-glass"></i> Search</button>
     </section>
 
-        <div id="carousel"></div>
+    <section class="flex flex-row justify-center items-center mt-4">
+        <label for="sortBy">Sort by:</label>
+        <select name="sortBy" id="sortBy" class="text-gray70 w-1/5 ml-4 outline-none">
+            <option value="title">Title</option>
+            <option value="latest">Latest</option>
+          </select>
+    </section>
 
     <section class="flex flex-col bg-gray70 text-gray30">
         <div class="grid grid-cols-2 gap-4 justify-items-center m-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 2xl:grid-cols-7" id="homeOutput"></div>
