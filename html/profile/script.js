@@ -17,6 +17,9 @@ let name = params.get("name");
 const url = `https://v2.api.noroff.dev/auction/profiles/${name}`;
 const url2 = `https://v2.api.noroff.dev/auction/profiles/${name}/listings`;
 
+
+
+// Fetch and display data for this profile
 async function getProfileByName() {
     try {
         const response = await fetch(url, {
@@ -37,6 +40,9 @@ async function getProfileByName() {
 
 getProfileByName();
 
+
+
+// Template for displaying profile data
 function listProfile(profile, out) {
     let newDiv = `
     <section class="flex flex-col pb-5 bg-gray50 bg-opacity-50 w-full items-center">
@@ -64,6 +70,9 @@ function listProfile(profile, out) {
 
     editAvatarButton.addEventListener("click", openAvatarOverlay);
 
+
+
+    // Ability to edit avatar if profile page is my own
     const loggedInProfile = `${localStorage.getItem("name")}`;
         if (loggedInProfile === `${profile.data.name}`) {
         editAvatarButton.style.display = "flex";
@@ -72,6 +81,9 @@ function listProfile(profile, out) {
     }
 }
 
+
+
+// Open and close avatar overlay
 closeOverlayButton1.addEventListener("click", closeAvatarOverlay);
 closeOverlayButton2.addEventListener("click", closeAvatarOverlay);
 
@@ -88,6 +100,7 @@ function closeAvatarOverlay() {
 
 
 
+// Fetch listings created by this profile
 async function getPostsByProfile() {
     try {
         const response = await fetch(url2, {
@@ -111,7 +124,3 @@ async function getPostsByProfile() {
 }
 
 getPostsByProfile();
-
-
-
-

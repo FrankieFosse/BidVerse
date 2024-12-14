@@ -1,18 +1,13 @@
 import {token, email} from "./utils.js";
 
-
-
-
-
-
 let avatar = document.getElementById("avatar");
-
-let params = new URL (document.location).searchParams;
 
 let name = localStorage.getItem("name");
 const url = `https://v2.api.noroff.dev/auction/profiles/${name}`;
 
 
+
+// Display avatar in header if logged in
 if (token && email) {
 async function getProfileByName() {
     try {

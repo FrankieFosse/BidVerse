@@ -2,6 +2,9 @@ const registerForm = document.querySelector("form#register");
 const mailAddon = document.getElementById("mailAddon");
 let out = document.getElementById("output");
 
+
+
+// Validate input fields in Register
 registerForm.addEventListener("submit", (event) => {
     event.preventDefault();
     const name = registerForm.name.value.trim();
@@ -24,11 +27,11 @@ registerForm.addEventListener("submit", (event) => {
 
         out.innerHTML = "Please enter username"
     }
-
-
-
 });
 
+
+
+// Register new user
 async function registerUser(name, email, password) {
     try {
         const options = {

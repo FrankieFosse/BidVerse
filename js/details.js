@@ -31,6 +31,9 @@ const url3 = `https://v2.api.noroff.dev/auction/listings/${id}?_seller=true`;
 
 let bidsCollection = [];
 
+
+
+// Display highest bid
 async function getHighestBid() {
     try {
         const response = await fetch(url);
@@ -52,6 +55,8 @@ async function getHighestBid() {
 getHighestBid();
 
 
+
+// Display seller if logged in
 if(token && email) {
     sellerOutput.style.display = "flex";
     seller.style.display = "flex";
@@ -61,6 +66,8 @@ if(token && email) {
 }
 
 
+
+// Fetch seller from API
 async function getSeller() {
     try {
         const response = await fetch(url3);
@@ -78,6 +85,8 @@ async function getSeller() {
 getSeller();
 
 
+
+// Display listing by ID
 async function getListingById() {
     try {
         const response = await fetch(url);
@@ -89,6 +98,9 @@ async function getListingById() {
     }
 }
 
+
+
+// Display image gallery for this listing
 async function getImages() {
     try {
         const imagesOutput = document.getElementById("imagesOutput")
@@ -97,9 +109,24 @@ async function getImages() {
 
         imagesOutput.innerHTML = responseData.data.media.map(listing => {
             return `
-            <img class="h-full object-cover col-span-1" src=${listing.url}>
+            <img id="detailsImage" class="h-4/5 w-full object-cover" src=${listing.url}>
             `
         }).join(" ");
+
+        const detailsImage = document.getElementById("detailsImage");
+
+        if (responseData.data.media.length == 1) {
+            imagesOutput.classList.remove("md:grid-cols-3");
+            imagesOutput.classList.remove("sm:grid-cols-2")
+            detailsImage.classList.remove("w-full");
+            detailsImage.classList.add("w-3/5");
+        }
+
+        if (responseData.data.media.length == 2) {
+            imagesOutput.classList.add("grid-cols-2");
+            imagesOutput.classList.remove("grid-cols-1");
+            imagesOutput.classList.remove("md:grid-cols-3");
+        }
 
     } catch(error) {
         console.error(error);
@@ -110,6 +137,9 @@ getImages();
 
 getListingById();
 
+
+
+// Template to display detailed listing
 function listDetailedItem(listing, out) {
 
     let tagsOutput = [];
@@ -146,10 +176,6 @@ function listDetailedItem(listing, out) {
     // Bid Overlay
     const bidOverlayButton = document.getElementById("bidOverlayButton");
 
-
-
-
-
     bidOverlayButton.addEventListener("click", openBidOverlay)
 
     function openBidOverlay() {
@@ -170,7 +196,6 @@ function listDetailedItem(listing, out) {
     }
 }
 
-
 closeBidOverlayButton.addEventListener("click", closeBidOverlay);
 cancelBidButton.addEventListener("click", closeBidOverlay);
 
@@ -183,10 +208,6 @@ function closeBidOverlay() {
 
 
 // Add Bid
-
-
-
-
 async function addBid() {
     try {
         const response = await fetch(url2 + "/bids", {
@@ -224,7 +245,6 @@ confirmBidButton.addEventListener("click", addBid);
 
 
 // Open delete overlay
-
 maybeDeleteListingButton.addEventListener("click", openDeleteOverlay);
 closeDeleteOverlayButton.addEventListener("click", closeDeleteOverlay);
 closeDeleteOverlayButton2.addEventListener("click", closeDeleteOverlay);
@@ -240,7 +260,6 @@ function closeDeleteOverlay() {
 
 
 // Delete listing
-
 deleteListingButton.addEventListener("click", deleteListing);
 
 async function deleteListing() {
@@ -270,7 +289,6 @@ async function deleteListing() {
 
 
 // Edit listing
-
 editListingButton.addEventListener("click", editListing);
 
 function editListing() {

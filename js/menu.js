@@ -2,7 +2,10 @@ const hamburgerButton = document.getElementById("hamburgerButton");
 const hamburgerMenu = document.getElementById("hamburgerMenu");
 const closeButton = document.getElementById("closeButton");
 
-hamburgerButton.addEventListener("click", showMenu)
+
+
+// Show NAV Menu
+hamburgerButton.addEventListener("click", showMenu);
 
 function showMenu() {
     hamburgerMenu.classList.remove("-right-full");
@@ -11,7 +14,10 @@ function showMenu() {
     closeButton.style.display = "block";
 }
 
-closeButton.addEventListener("click", closeMenu)
+
+
+// Close NAV Menu
+closeButton.addEventListener("click", closeMenu);
 
 function closeMenu() {
     hamburgerMenu.classList.add("-right-full");

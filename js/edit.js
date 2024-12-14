@@ -32,6 +32,9 @@ const url = `https://v2.api.noroff.dev/auction/listings/${id}`;
 let mediaCollection = [];
 let saveURLArray = [];
 
+
+
+// Fetch values from element and display in input fields
 async function fetchListings() {
     try {
         const response = await fetch(url, {
@@ -61,6 +64,9 @@ async function fetchListings() {
 
 fetchListings();
 
+
+
+// Fetch media for specific element
 async function fetchMediaData() {
     try {
         const response = await fetch(url, {
@@ -79,6 +85,9 @@ async function fetchMediaData() {
 }
 
 fetchMediaData();
+
+
+
 
 function myFunction(counter, defaultURL = "", defaultAlt = "") {
     // Create a new <li> element
@@ -104,6 +113,9 @@ function myFunction(counter, defaultURL = "", defaultAlt = "") {
     return mediaDiv;
 }
 
+
+
+// Initialize media elements already included for this listing
 async function initializeMedia() {
     const mediaData = await fetchMediaData();
 
@@ -125,7 +137,7 @@ async function initializeMedia() {
     // Update the media amount after adding elements
     mediaAmount.innerHTML = mediaCollection.length;
 
-    // Disable the remove button if there's only one element
+    // Disable the remove button if there is only one element
     if (mediaCollection.length === 1) {
         removeMediaButton.setAttribute("disabled", true);
         removeMediaButton.classList.add("bg-opacity-50");
@@ -136,6 +148,8 @@ async function initializeMedia() {
         removeMediaButton.classList.remove("bg-opacity-50");
     }
 }
+
+
 
 // Add new media element dynamically
 function addMediaToContainer() {
@@ -229,11 +243,10 @@ function removeMediaFromContainer() {
 }
 
 
+// Validate input fields for media
 function loopElements() {
 
     let allFieldsValid = true;
-
-
 
     // Iterate over the DOM elements stored in mediaCollection
     mediaCollection.forEach((mediaElement, index) => {
@@ -285,10 +298,8 @@ function loopElements() {
     }
 }
 
-// Initialize the media container with data from the API
 initializeMedia();
 
-// Event listeners
 openMediaButton.addEventListener("click", addMediaToContainer);
 removeMediaButton.addEventListener("click", removeMediaFromContainer);
 confirmMedia.addEventListener("click", loopElements);
@@ -297,6 +308,9 @@ addMediaButton.addEventListener("click", openMediaOverlay);
 cancelMedia.addEventListener("click", closeMediaOverlay);
 cancelMedia2.addEventListener("click", closeMediaOverlay);
 
+
+
+// Open or hide the media overlay
 function openMediaOverlay() {
     mediaOverlay.style.display = "flex";
     overlayBlur.style.display = "flex";
@@ -311,6 +325,7 @@ function closeMediaOverlay() {
 
 
 
+// Update listing
 async function updateListing() {
     try {
         if (listingDay.value.length == 1) {
@@ -364,9 +379,6 @@ async function updateListing() {
             createStatus.innerHTML = "Image " + (responseData.errors[0].path[1]+1) + " - " + responseData.errors[0].message;
             createStatus.style.opacity = "100";
         }
-        
-
-
     } catch(error) {
         console.error(error);
     }
@@ -378,6 +390,7 @@ updateListingButton.addEventListener("click", updateListing);
 
 
 
+// Function to remove all media for this listing
 removeAllMediaButton.addEventListener("click", () => {
     // Clear mediaContainer (UI elements)
     mediaContainer.innerHTML = "";

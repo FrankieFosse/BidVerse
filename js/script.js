@@ -7,6 +7,9 @@ let api = `https://v2.api.noroff.dev/auction/listings?_active=true`;
 let collection = [];
 const searchButton = document.getElementById("searchButton");
 
+
+
+// Fetch and display elements from API
 async function fetchListings() {
     try {
         const response = await fetch(api);
@@ -37,6 +40,9 @@ search.addEventListener("keyup", function(event) {
     }
 })
 
+
+
+// Search functionality
 async function fetchSearchListings() {
     try {
         let query = search.value;

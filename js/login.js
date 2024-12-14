@@ -1,9 +1,11 @@
 const loginForm = document.querySelector("form#login");
 const out = document.querySelector("p#output");
 
+
+
+// Validate input fields in Login
 loginForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    console.log("Trying to log in");
     const email = loginForm.email.value.trim();
     const password = loginForm.password.value.trim();
     if (email && password) {
@@ -16,6 +18,9 @@ loginForm.addEventListener("submit", (event) => {
     }
 });
 
+
+
+// Log in user
 async function getToken(email, password) {
     try {
         const options = {
@@ -25,9 +30,7 @@ async function getToken(email, password) {
             },
             body: JSON.stringify({ email, password }),
         };
-        console.log(options);
         const response = await fetch(`https://v2.api.noroff.dev/auth/login?_holidaze=true`, options);
-        console.log(response);
         if (response.ok) {
             const data = await response.json();
             console.log(data);

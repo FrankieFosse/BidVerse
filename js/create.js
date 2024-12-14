@@ -1,7 +1,3 @@
-
-
-// Crate new Listing function
-
 const listingTitle = document.getElementById("title");
 const listingDescription = document.getElementById("description");
 const listingTags = document.getElementById("tags");
@@ -24,7 +20,11 @@ const mediaAmountStatus = document.getElementById("mediaAmountStatus");
 const overlayBlur = document.getElementById("overlayBlur");
 const descriptionLength = document.getElementById("descriptionLength");
 const mediaOverlayForm = document.getElementById("mediaOverlayForm");
+const createListingButton = document.getElementById("createListingButton");
 
+
+
+// Create new listing function
 async function createListing() {
     try {
         if (listingDay.value.length == 1) {
@@ -61,7 +61,6 @@ async function createListing() {
             setTimeout(() => {
                     window.location.href = `details.html?id=${id}`;
             }, 1000);
-
         }
         else {
             createStatus.innerHTML = responseData.errors[0].message;
@@ -79,22 +78,16 @@ async function createListing() {
             createStatus.innerHTML = "Image " + (responseData.errors[0].path[1]+1) + " - " + responseData.errors[0].message;
             createStatus.style.opacity = "100";
         }
-        
-
-
     } catch(error) {
         console.error(error);
     }
 }
 
-const createListingButton = document.getElementById("createListingButton");
-
-
 createListingButton.addEventListener("click", createListing);
 
 
 
-
+// Open and close media overlay
 addMediaButton.addEventListener("click", openMediaOverlay);
 cancelMedia.addEventListener("click", closeMediaOverlay);
 cancelMedia2.addEventListener("click", closeMediaOverlay);
@@ -126,22 +119,21 @@ function updateDescriptionLength() {
 
 
 
-// Newest Function
 
 
+// Add media data to listing
 const mediaAmount = document.getElementById("mediaAmount");
 const openMediaButton = document.getElementById("openMediaButton");
 const removeMediaButton = document.getElementById("removeMediaButton");
 
-let mediaCollection = []; // Store DOM element references
+let mediaCollection = [];
 
 function myFunction(counter) {
-    // Create a new <li> element
+
     let mediaDiv = document.createElement("li");
     mediaDiv.id = `mediaElement${counter}`;
-    mediaDiv.className = "bg-brown50 p-3 mt-3 text-center w-4/5 border-4 border-brown70";
+    mediaDiv.className = "bg-brown50 p-3 mt-3 text-center w-5/6 md:w-3/5 border-4 border-brown70";
 
-    // Set its inner HTML
     mediaDiv.innerHTML = `
         <div>
             <p class="flex flex-col justify-center items-center text-gray30 bg-brown30 w-8 h-8 rounded-full">${counter + 1}</p>
@@ -159,11 +151,14 @@ function myFunction(counter) {
     return mediaDiv;
 }
 
+
+
+// Add media div elements to page
 function addMediaToContainer() {
     const counter = mediaCollection.length;
     const newMedia = myFunction(counter);
 
-    mediaCollection.push(newMedia); // Store the actual DOM node in the array
+    mediaCollection.push(newMedia);
     mediaContainer.appendChild(newMedia);
 
     mediaAmount.innerHTML = mediaCollection.length;
@@ -201,10 +196,13 @@ function addMediaToContainer() {
     }
 }
 
+
+
+// Remove media div elements from page
 function removeMediaFromContainer() {
-    const lastMedia = mediaCollection.pop(); // Remove the last DOM element from the array
+    const lastMedia = mediaCollection.pop();
     if (lastMedia) {
-        mediaContainer.removeChild(lastMedia); // Remove from the DOM
+        mediaContainer.removeChild(lastMedia);
     }
 
     mediaAmount.innerHTML = mediaCollection.length;
@@ -242,11 +240,13 @@ function removeMediaFromContainer() {
     }
 }
 
+
+
+// Validate input fields for create listing
 function loopElements() {
     let saveURLArray = [];
     let allFieldsValid = true;
 
-    // Iterate over the DOM elements stored in mediaCollection
     mediaCollection.forEach((mediaElement, index) => {
         const URLInput = mediaElement.querySelector(`#mediaURL${index}`);
         const ALTInput = mediaElement.querySelector(`#mediaALT${index}`);
@@ -256,7 +256,6 @@ function loopElements() {
 
         saveURLArray.push({ url: value1, alt: value2 });
 
-        // Validate fields
         if (!value1 || !value2) {
             allFieldsValid = false;
 
@@ -298,188 +297,10 @@ mediaContainer.appendChild(initialMedia);
 // Update the media amount after adding the initial element
 mediaAmount.innerHTML = mediaCollection.length;
 
-// Disable the remove button initially since there's only one element
+// Disable the remove button initially since there is only one element
 removeMediaButton.setAttribute("disabled", true);
 removeMediaButton.classList.add("bg-opacity-50");
 
-// Event listeners
 openMediaButton.addEventListener("click", addMediaToContainer);
 removeMediaButton.addEventListener("click", removeMediaFromContainer);
 confirmMedia.addEventListener("click", loopElements);
-
-
-
-
-
-
-
-
-
-/*
-
-// Add media function
-
-const mediaAmount = document.getElementById("mediaAmount");
-const openMediaButton = document.getElementById("openMediaButton");
-const removeMediaButton = document.getElementById("removeMediaButton");
-
-let mediaCollection = [];
-
-function myFunction() {
-    const counter = mediaCollection.length;
-    
-    let mediaDiv = `
-    <li id="mediaElement${counter}" class="bg-brown50 p-3 mt-3 mx-6 text-center w-4/5">
-    <div>
-    <p class="flex flex-col justify-center items-center text-gray30 bg-brown30 w-8 h-8 rounded-full">${counter+1}</p>
-    </div>
-        <label for="mediaURL" class="mt-6 text-gray30">Media-URL</label>
-        <div class="myURLdiv"><textarea id="mediaURL${counter}" placeholder="Required" class="px-2 mb-6 py-1 rounded h-12 w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300"></textarea></div>
-        <label for="mediaALT" class="mt-6 text-gray30">Media Alt-text / description</label>
-        <input type="text" id="mediaALT${counter}" placeholder="Required" class="px-2 py-1 mb-6 rounded w-full outline-none bg-gray30 bg-opacity-85 focus:bg-opacity-100 duration-300">
-    </li>
-`
-return mediaDiv;
-
-}
-
-mediaContainer.innerHTML = mediaCollection.join("");
-mediaAmount.innerHTML = mediaCollection.length;
-
-function addMediaToContainer() {
-    const newMedia = myFunction();
-    mediaCollection.push(newMedia);
-
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = newMedia;
-    const newElement = tempDiv.firstElementChild;
-    mediaContainer.appendChild(newElement);
-    mediaAmount.innerHTML = mediaCollection.length;
-    
-    if (mediaCollection.length === 1) {
-        removeMediaButton.setAttribute("disabled", true);
-        removeMediaButton.classList.add("bg-opacity-50");
-    }
-    if (mediaCollection.length > 1) {
-        removeMediaButton.removeAttribute("disabled");
-        removeMediaButton.classList.remove("bg-opacity-50");
-    }
-}
-
-mediaCollection.push(myFunction());
-mediaContainer.innerHTML = mediaCollection;
-mediaAmount.innerHTML = mediaCollection.length;
-
-
-openMediaButton.addEventListener("click", addMediaToContainer);
-removeMediaButton.addEventListener("click", removeMediaFromContainer);
-
-
-
-
-function removeMediaFromContainer() {
-
-    mediaCollection.pop();
-
-    const lastChild = mediaContainer.lastElementChild;
-    if (lastChild) {
-        mediaContainer.removeChild(lastChild);
-    }
-    mediaAmount.innerHTML = mediaCollection.length;
-
-
-    if (mediaCollection.length === 1) {
-        removeMediaButton.setAttribute("disabled", true);
-        removeMediaButton.classList.add("bg-opacity-50");
-    }
-    if (mediaCollection.length > 1) {
-        removeMediaButton.removeAttribute("disabled");
-        removeMediaButton.classList.remove("bg-opacity-50");
-    }
-}
-
-
-function loopElements() {
-
-let saveURLArray = [];
-let allFieldsValid = true;
-    for(let i = 0; i<mediaCollection.length; i++) {
-        let URLelementid = "mediaURL"+(i);
-        let ALTelementid = "mediaALT"+(i);
-
-        let URLInput = document.getElementById(URLelementid);
-        let ALTInput = document.getElementById(ALTelementid);
-
-        if(URLInput && ALTInput) {
-            let value1 = URLInput.value.trim();
-            let value2 = ALTInput.value.trim();
-
-            saveURLArray.push({url: value1, alt: value2});
-
-            if(!value1 || !value2) {
-                allFieldsValid = false;
-                confirmMediaStatus.style.opacity = "100";
-                confirmMediaStatus.innerHTML = !value1 ? "Please provide a URL" : "Please provide Alt-text";
-            }
-            if(value1 == "" || value2 == "") {
-                console.log("NOT OK");
-            } else {
-                console.log("OK");
-            }
-
-
-        }
-
-    }
-addMediaButton.innerHTML = `<i class="fa-solid fa-pen-to-square mr-2"></i><p>Media</p>`
-
-listingMediaURL = saveURLArray;
-
-}
-
-confirmMedia.addEventListener("click", loopElements);
-
-
-
-
-
-
-
-
-
-/*
-function addMediaToContainer() {
-    mediaCollection.push(myFunction());
-    mediaContainer.innerHTML = mediaCollection;
-    mediaAmount.innerHTML = mediaCollection.length;
-
-    if (mediaCollection.length === 1) {
-        removeMediaButton.setAttribute("disabled", true);
-        removeMediaButton.classList.add("bg-opacity-50");
-    }
-    if (mediaCollection.length > 1) {
-        removeMediaButton.removeAttribute("disabled");
-        removeMediaButton.classList.remove("bg-opacity-50");
-    }
-} */
-
-/*function addMediaToContainer() {
-    mediaCollection.push(myFunction());
-    mediaContainer.innerHTML = mediaCollection;
-    mediaAmount.innerHTML = mediaCollection.length;
-
-    if (mediaCollection.length === 1) {
-        removeMediaButton.setAttribute("disabled", true);
-        removeMediaButton.classList.add("bg-opacity-50");
-    }
-    if (mediaCollection.length > 1) {
-        removeMediaButton.removeAttribute("disabled");
-        removeMediaButton.classList.remove("bg-opacity-50");
-    }
-}*/
-
-
-
-
-
-

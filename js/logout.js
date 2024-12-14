@@ -1,6 +1,7 @@
+
+// Function to log out user if logged in
 export const ifLoggedIn = () => {
     const logOutButton2 = document.getElementById("logout2");
-    const logInButton = document.getElementById("login");
     const avatarElement = document.getElementById("profileLink");
 
     let token = localStorage.getItem("token");

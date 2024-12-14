@@ -24,11 +24,7 @@ window.addEventListener("load", isLoggedIn);
 
 
 
-
-
-
-
-
+// List items from API
 export const listItemTemplate = (listing) => {
         let imagesOutput = listing.media.map(listing => {
             return `
@@ -78,7 +74,6 @@ return `
 
 
 // Show credits in NAV Menu
-
 const name = localStorage.getItem("name");
 const url = `https://v2.api.noroff.dev/auction/profiles/${name}`
 const credits = document.getElementById("credits");

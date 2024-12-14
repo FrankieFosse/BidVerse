@@ -11,6 +11,9 @@ let params = new URL (document.location).searchParams;
 let name = params.get("name");
 const url = `https://v2.api.noroff.dev/auction/profiles/${name}`;
 
+
+
+// Update avatar
 async function updateAvatar() {
     try {
         const response = await fetch(url, {
