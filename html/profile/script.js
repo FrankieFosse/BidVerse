@@ -1,4 +1,4 @@
-import {listData} from "./utils.js";
+
 
 let outElement = document.getElementById("output");
 let out = document.getElementById("profileListings");
@@ -16,6 +16,46 @@ let params = new URL (document.location).searchParams;
 let name = params.get("name");
 const url = `https://v2.api.noroff.dev/auction/profiles/${name}`;
 const url2 = `https://v2.api.noroff.dev/auction/profiles/${name}/listings`;
+
+
+
+
+
+
+
+export const listItemTemplate = (listing) => {
+    let imagesOutput = listing.media.map(listing => {
+        return `
+        <img class="h-36 object-cover" src=${listing.url}>
+        `
+    }).slice(0, 1);
+    if (imagesOutput.length == 0) {
+        imagesOutput = `
+        <img class="h-36 object-cover" src="/images/image-placeholder-500x500.jpg">
+        `
+    }
+return `<a id="listingByProfile" href="/html/details.html?id=${listing.id}" class="bg-blue50 bg-opacity-50 hover:scale-105 hover:bg-blue30 duration-300 h-72 w-full">
+        <div id="postElement" class="flex flex-col items-center justify-center">
+        <h2 class="flex flex-col justify-center text-gray30 h-16 text-center m-4 text-ellipsis whitespace-nowrap overflow-hidden w-4/5">${listing.title}</h2>
+        <div class="w-full flex flex-col items-center mb-1 px-1">${imagesOutput}</div>
+        </div>
+        </a>`;
+}
+
+export function listData(list, out) {
+    out.innerHTML = "";
+    let output = "";
+    for (let item of list) {
+        output += `${listItemTemplate(item)}`
+    }
+    if (output) {
+        out.innerHTML = output;
+    }
+}
+
+
+
+
 
 
 
@@ -117,6 +157,36 @@ async function getPostsByProfile() {
             collection.push(item);
         }
         listData(collection, out);
+        if (collection.length == 1) {
+            out.classList.remove("2xl:grid-cols-7");
+            out.classList.remove("xl:grid-cols-6");
+            out.classList.remove("lg:grid-cols-5");
+            out.classList.remove("md:grid-cols-4");
+            out.classList.remove("sm:grid-cols-3");
+            out.classList.remove("grid-cols-2");
+            out.classList.add("grid-cols-1");
+        }
+        if (collection.length == 2) {
+            out.classList.remove("2xl:grid-cols-7");
+            out.classList.remove("xl:grid-cols-6");
+            out.classList.remove("lg:grid-cols-5");
+            out.classList.remove("md:grid-cols-4");
+            out.classList.remove("sm:grid-cols-3");
+            if (window.innerWidth > 925) {
+                out.classList.add("w-3/5");
+            }
+
+        }
+        if (collection.length == 3) {
+            out.classList.remove("2xl:grid-cols-7");
+            out.classList.remove("xl:grid-cols-6");
+            out.classList.remove("lg:grid-cols-5");
+            out.classList.remove("md:grid-cols-4");
+            if (window.innerWidth > 925) {
+                out.classList.add("w-4/5");
+            }
+
+        }
 
     } catch(error) {
         console.error(error);
@@ -124,3 +194,12 @@ async function getPostsByProfile() {
 }
 
 getPostsByProfile();
+
+
+
+// Remove page loader when page is loaded
+function removePageLoader() {
+    pageLoader.style.display = "none";
+}
+
+window.addEventListener("load", removePageLoader);

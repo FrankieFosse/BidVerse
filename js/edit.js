@@ -22,6 +22,7 @@ const descriptionLength = document.getElementById("descriptionLength");
 const removeAllMediaButton = document.getElementById("removeAllMediaButton");
 const goBackButton = document.getElementById("goBackButton");
 let tagsCollection = "";
+let pageLoader = document.getElementById("pageLoader");
 
 let params = new URL (document.location).searchParams;
 
@@ -90,12 +91,10 @@ fetchMediaData();
 
 
 function myFunction(counter, defaultURL = "", defaultAlt = "") {
-    // Create a new <li> element
     let mediaDiv = document.createElement("li");
     mediaDiv.id = `mediaElement${counter}`;
     mediaDiv.className = "bg-brown50 p-3 mt-3 mx-6 text-center w-4/5";
 
-    // Set its inner HTML with default values
     mediaDiv.innerHTML = `
         <div>
             <p class="flex flex-col justify-center items-center text-gray30 bg-brown30 w-8 h-8 rounded-full">${counter + 1}</p>
@@ -147,6 +146,8 @@ async function initializeMedia() {
         removeMediaButton.removeAttribute("disabled");
         removeMediaButton.classList.remove("bg-opacity-50");
     }
+    
+    updateRemoveAllMediaButtonVisibility();
 }
 
 
@@ -243,6 +244,7 @@ function removeMediaFromContainer() {
 }
 
 
+
 // Validate input fields for media
 function loopElements() {
 
@@ -296,6 +298,7 @@ function loopElements() {
         mediaAmountStatus.style.display = "flex";
         mediaAmountStatus.innerHTML = mediaCollection.length + " media element(s) added";
     }
+
 }
 
 initializeMedia();
@@ -409,6 +412,8 @@ removeAllMediaButton.addEventListener("click", () => {
     listingMediaURL = [];
     listingMediaALT = [];
 
+    updateRemoveAllMediaButtonVisibility();
+
 });
 
 goBackButton.addEventListener("click", () => {
@@ -417,7 +422,22 @@ goBackButton.addEventListener("click", () => {
 
 
 
+// Do not display RemoveAllMediaButton if there is no media attached
+function updateRemoveAllMediaButtonVisibility() {
+    if (mediaCollection.length === 0) {
+        removeAllMediaButton.style.display = "none";
+    } else {
+        removeAllMediaButton.style.display = "block";
+    }
+}
+
+updateRemoveAllMediaButtonVisibility();
 
 
 
+// Remove page loader when page is loaded
+function removePageLoader() {
+    pageLoader.style.display = "none";
+}
 
+window.addEventListener("load", removePageLoader);

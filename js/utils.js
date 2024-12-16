@@ -26,15 +26,40 @@ window.addEventListener("load", isLoggedIn);
 
 // List items from API
 export const listItemTemplate = (listing) => {
-        let imagesOutput = listing.media.map(listing => {
-            return `
-            <img src=${listing.url ? listing.url : "/images/image-placeholder-500x500.jpg"}>
-            `
-        }).slice(0, 1);
-    return `<a href="details.html?id=${listing.id}" class="w-full bg-blue50 h-48 overflow-hidden hover:scale-105 hover:bg-blue30 duration-300">
+    let imagesOutput = listing.media.map(listing => {
+        return `
+        <img class="max-h-40 object-cover" src=${listing.url}>
+        `
+    }).slice(0, 1);
+    if (imagesOutput.length == 0) {
+        imagesOutput = `
+        <img src="/images/image-placeholder-500x500.jpg">
+        `
+    }
+
+    if (sortBy.value == "seller") {
+        return `<a href="details.html?id=${listing.id}" class="w-full bg-blue50 bg-opacity-50 h-64 overflow-hidden hover:scale-105 hover:bg-blue30 duration-300">
             <div id="postElement" class="flex flex-col justify-center items-center">
-            <h2 class="h-20 w-full content-center text-gray30 overflow-hidden text-center w-4/5">${listing.title}</h2>
-            <div class="h-24 w-5/6 mb-2 bg-gray70 object-contain overflow-hidden content-center">${imagesOutput}</div>
+            <h2 class="h-16 w-full content-center text-gray30 overflow-hidden text-center w-4/5">${listing.title.slice(0, 20)}</h2>
+            <p class="w-full content-center text-gray30 overflow-hidden text-center w-4/5 font-light text-xs">${listing.seller.name}</p>
+            <div class="flex flex-col h-36 w-11/12 object-contain overflow-hidden items-center justify-center content-center">${imagesOutput}</div>
+            </div>
+            </a>`;
+    }
+        if (listing.title.length > 19) {
+            return `<a href="details.html?id=${listing.id}" class="w-full bg-blue50 bg-opacity-50 h-64 overflow-hidden hover:scale-105 hover:bg-blue30 duration-300">
+            <div id="postElement" class="flex flex-col justify-center items-center">
+            <h2 class="h-16 w-full content-center text-gray30 overflow-hidden text-center w-4/5">${listing.title.slice(0, 20)}...</h2>
+            <p class="w-full content-center text-gray30 overflow-hidden text-center w-4/5 font-light text-xs">${listing.seller.name}</p>
+            <div class="flex flex-col h-36 w-11/12 mb-2 object-contain overflow-hidden content-center">${imagesOutput}</div>
+            </div>
+            </a>`;
+        }
+    return `<a href="details.html?id=${listing.id}" class="w-full bg-blue50 bg-opacity-50 h-64 overflow-hidden hover:scale-105 hover:bg-blue30 duration-300">
+            <div id="postElement" class="flex flex-col justify-center items-center">
+            <h2 class="h-16 w-full content-center text-gray30 overflow-hidden text-center w-4/5">${listing.title.slice(0, 20)}</h2>
+            <p class="w-full content-center text-gray30 overflow-hidden text-center w-4/5 font-light text-xs">${listing.seller.name}</p>
+            <div class="flex flex-col h-36 w-11/12 object-contain overflow-hidden items-center justify-center content-center">${imagesOutput}</div>
             </div>
             </a>`;
 }

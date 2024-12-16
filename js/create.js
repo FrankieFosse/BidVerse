@@ -304,3 +304,12 @@ removeMediaButton.classList.add("bg-opacity-50");
 openMediaButton.addEventListener("click", addMediaToContainer);
 removeMediaButton.addEventListener("click", removeMediaFromContainer);
 confirmMedia.addEventListener("click", loopElements);
+
+
+
+// Remove page loader when page is loaded
+function removePageLoader() {
+    pageLoader.style.display = "none";
+}
+
+window.addEventListener("load", removePageLoader);
