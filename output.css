@@ -1552,10 +1552,6 @@ video {
 }
 
 @media (min-width: 1024px){
-  .lg\:h-2\/4{
-    height: 50%;
-  }
-
   .lg\:w-1\/5{
     width: 20%;
   }
