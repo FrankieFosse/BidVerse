@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "build:css": "npx tailwindcss -i ./styles.css -o ./output.css",
-    "watch:css": "npx tailwindcss -i ./styles.css -o ./output.css --watch",
+    "build:css": "npx tailwindcss -i ./html/styles.css -o ./html/output.css",
+    "watch:css": "npx tailwindcss -i ./html/styles.css -o ./html/output.css --watch",
     "live": "live-server"
   },
   "keywords": [],

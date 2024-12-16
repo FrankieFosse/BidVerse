@@ -576,8 +576,8 @@ video {
   right: 0px;
 }
 
-.right-10{
-  right: 2.5rem;
+.right-12{
+  right: 3rem;
 }
 
 .top-0{
@@ -823,10 +823,6 @@ video {
   max-height: 10rem;
 }
 
-.w-1\/5{
-  width: 20%;
-}
-
 .w-10{
   width: 2.5rem;
 }
@@ -837,6 +833,10 @@ video {
 
 .w-12{
   width: 3rem;
+}
+
+.w-16{
+  width: 4rem;
 }
 
 .w-2\/3{
@@ -1316,6 +1316,11 @@ video {
 .text-xl{
   font-size: 1.25rem;
   line-height: 1.75rem;
+}
+
+.text-xs{
+  font-size: 0.75rem;
+  line-height: 1rem;
 }
 
 .font-light{
