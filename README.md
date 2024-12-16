@@ -1,6 +1,6 @@
-# Tailwind CSS Project
+# BidVerse
 
-This project uses **Tailwind CSS** for styling. Below are the steps to build the CSS and view the page with the applied Tailwind styles.
+This project uses **Tailwind CSS** for styling.
 
 ## Prerequisites
 
