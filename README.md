@@ -21,3 +21,9 @@ You can use a development server such as Live Server:
 
 **npm install -g live-server**
 **live-server**
+
+
+## Known issues
+
+Site address includes /html/
+Some Image URLs are not valid
