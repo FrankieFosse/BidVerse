@@ -37,7 +37,16 @@ export const listItemTemplate = (listing) => {
         `
     }
 
-    if (sortBy.value == "seller") {
+    if (sortBy.value == "seller" && listing.title.length > 19) {
+        return `<a href="details.html?id=${listing.id}" class="w-full bg-blue50 bg-opacity-50 h-64 overflow-hidden hover:scale-105 hover:bg-blue30 duration-300">
+            <div id="postElement" class="flex flex-col justify-center items-center">
+            <h2 class="h-16 w-full content-center text-gray30 overflow-hidden text-center w-4/5">${listing.title.slice(0, 20)}...</h2>
+            <p class="w-full content-center text-gray30 overflow-hidden text-center w-4/5 font-light text-xs">${listing.seller.name}</p>
+            <div class="flex flex-col h-36 w-11/12 object-contain overflow-hidden items-center justify-center content-center">${imagesOutput}</div>
+            </div>
+            </a>`;
+    }
+    else if (sortBy.value == "seller") {
         return `<a href="details.html?id=${listing.id}" class="w-full bg-blue50 bg-opacity-50 h-64 overflow-hidden hover:scale-105 hover:bg-blue30 duration-300">
             <div id="postElement" class="flex flex-col justify-center items-center">
             <h2 class="h-16 w-full content-center text-gray30 overflow-hidden text-center w-4/5">${listing.title.slice(0, 20)}</h2>
@@ -46,6 +55,7 @@ export const listItemTemplate = (listing) => {
             </div>
             </a>`;
     }
+    
         if (listing.title.length > 19) {
             return `<a href="details.html?id=${listing.id}" class="w-full bg-blue50 bg-opacity-50 h-64 overflow-hidden hover:scale-105 hover:bg-blue30 duration-300">
             <div id="postElement" class="flex flex-col justify-center items-center">
