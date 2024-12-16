@@ -25,5 +25,6 @@ You can use a development server such as Live Server:
 
 ## Known issues
 
-Site address includes /html/
-Some Image URLs are not valid
+- Site address includes /html/
+
+- Some Image URLs are not valid
